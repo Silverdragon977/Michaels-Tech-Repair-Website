@@ -1,0 +1,407 @@
+#cloud-config
+
+# ============================================================
+# Generic Docker Host Bootstrap
+#
+# Intended for a DigitalOcean Docker 1-Click Droplet.
+#
+# Responsibilities:
+#
+#   - Update the Ubuntu host
+#   - Install useful host utilities
+#   - Verify Docker
+#   - Verify Docker Compose
+#   - Enable Fail2ban
+#   - Configure swap
+#   - Install a reusable host setup helper
+#
+# This file intentionally contains NO:
+#
+#   - application name
+#   - domain name
+#   - deployment username
+#   - application directory
+#   - Laravel .env values
+#
+# Application-specific configuration is handled later by:
+#
+#   setup.sh
+#   SetupUserAndPermissions.sh
+#   .env
+# ============================================================
+
+
+# ------------------------------------------------------------
+# Refresh package metadata
+# ------------------------------------------------------------
+
+package_update: true
+
+
+# ------------------------------------------------------------
+# Apply available package upgrades
+# ------------------------------------------------------------
+
+package_upgrade: true
+
+
+# ------------------------------------------------------------
+# Host-level utilities
+#
+# PHP, Composer, Node, npm, TypeScript, Sass, and Laravel are
+# intentionally NOT installed on the host.
+#
+# Those belong inside the Docker build.
+# ------------------------------------------------------------
+
+packages:
+
+  - git
+
+  - curl
+
+  - ca-certificates
+
+  - fail2ban
+
+  - unattended-upgrades
+
+  - unzip
+
+  - jq
+
+
+# ============================================================
+# Reusable host setup helper
+#
+# This creates:
+#
+#   /usr/local/sbin/laravel-host-setup
+#
+# Despite the name, it does not depend on Laravel.
+#
+# It prepares the Linux/Docker host and may safely be rerun.
+#
+# Usage:
+#
+#   sudo laravel-host-setup
+# ============================================================
+
+write_files:
+
+  - path: /usr/local/sbin/laravel-host-setup
+
+    owner: root:root
+
+    permissions: '0755'
+
+    content: |
+      #!/usr/bin/env bash
+
+      set -Eeuo pipefail
+
+
+      # ======================================================
+      # Generic Docker Host Setup
+      # ======================================================
+
+
+      echo
+      echo "============================================================"
+      echo "  Docker Host Configuration"
+      echo "============================================================"
+      echo
+
+
+      # ======================================================
+      # Docker
+      # ======================================================
+
+      echo "🐳 Checking Docker..."
+
+
+      if ! command -v docker >/dev/null 2>&1; then
+
+          echo
+          echo "❌ ERROR: Docker was not found."
+          echo
+          echo "This host setup expects Docker to already be installed."
+          echo
+          echo "For DigitalOcean, use the Docker 1-Click image."
+          echo
+
+          exit 1
+
+      fi
+
+
+      echo "✅ Docker is installed."
+
+
+      # ------------------------------------------------------
+      # Enable Docker service when systemd service exists
+      # ------------------------------------------------------
+
+      if systemctl list-unit-files \
+          | grep -q '^docker.service'
+      then
+
+          systemctl enable docker
+
+          systemctl start docker
+
+
+          if systemctl is-active \
+              --quiet \
+              docker
+          then
+
+              echo "✅ Docker service is running."
+
+          else
+
+              echo
+              echo "❌ ERROR: Docker service failed to start."
+              echo
+
+              exit 1
+
+          fi
+
+      else
+
+          echo "⚠️ docker.service was not found."
+
+      fi
+
+
+      # ======================================================
+      # Docker Compose
+      # ======================================================
+
+      echo
+      echo "🐳 Checking Docker Compose..."
+
+
+      if docker compose version >/dev/null 2>&1; then
+
+          echo "✅ Docker Compose plugin is available."
+
+      else
+
+          echo
+          echo "❌ ERROR: Docker Compose plugin was not found."
+          echo
+          echo "Expected command:"
+          echo
+          echo "  docker compose"
+          echo
+
+          exit 1
+
+      fi
+
+
+      # ======================================================
+      # Fail2ban
+      # ======================================================
+
+      echo
+      echo "🛡️ Configuring Fail2ban..."
+
+
+      systemctl enable fail2ban
+
+      systemctl restart fail2ban
+
+
+      if systemctl is-active \
+          --quiet \
+          fail2ban
+      then
+
+          echo "✅ Fail2ban is running."
+
+      else
+
+          echo
+          echo "❌ ERROR: Fail2ban failed to start."
+          echo
+
+          exit 1
+
+      fi
+
+
+      # ======================================================
+      # Swap
+      #
+      # Default:
+      #
+      #   1 GB
+      #
+      # This is deliberately generic and not tied to a
+      # particular project.
+      #
+      # Existing swap is not recreated.
+      # ======================================================
+
+      SWAP_FILE="/swapfile"
+
+      SWAP_SIZE="1G"
+
+
+      echo
+      echo "💾 Checking swap..."
+
+
+      # ------------------------------------------------------
+      # Create swap file if missing
+      # ------------------------------------------------------
+
+      if [[ ! -f "$SWAP_FILE" ]]; then
+
+          echo "Creating $SWAP_SIZE swapfile..."
+
+
+          fallocate \
+              -l "$SWAP_SIZE" \
+              "$SWAP_FILE"
+
+
+          chmod \
+              600 \
+              "$SWAP_FILE"
+
+
+          mkswap \
+              "$SWAP_FILE"
+
+
+          echo "✅ Swapfile created."
+
+      else
+
+          echo "ℹ️ Swapfile already exists."
+
+      fi
+
+
+      # ------------------------------------------------------
+      # Add swap to /etc/fstab if necessary
+      # ------------------------------------------------------
+
+      if ! grep -q \
+          "^${SWAP_FILE}[[:space:]]" \
+          /etc/fstab
+      then
+
+          echo \
+              "$SWAP_FILE none swap sw 0 0" \
+              >> /etc/fstab
+
+
+          echo "✅ Swapfile added to /etc/fstab."
+
+      else
+
+          echo "ℹ️ Swapfile already exists in /etc/fstab."
+
+      fi
+
+
+      # ------------------------------------------------------
+      # Activate swap if necessary
+      # ------------------------------------------------------
+
+      if swapon \
+          --show=NAME \
+          --noheadings \
+          | grep -qx "$SWAP_FILE"
+      then
+
+          echo "ℹ️ Swapfile is already active."
+
+      else
+
+          swapon "$SWAP_FILE"
+
+
+          echo "✅ Swapfile activated."
+
+      fi
+
+
+      # ======================================================
+      # Unattended upgrades
+      # ======================================================
+
+      echo
+      echo "🔄 Checking automatic security updates..."
+
+
+      if command -v unattended-upgrade >/dev/null 2>&1; then
+
+          echo "✅ unattended-upgrades is installed."
+
+      else
+
+          echo "⚠️ unattended-upgrades was not found."
+
+      fi
+
+
+      # ======================================================
+      # Host status
+      # ======================================================
+
+      echo
+      echo "============================================================"
+      echo "  Host Status"
+      echo "============================================================"
+      echo
+
+
+      echo "Docker:"
+      docker --version
+
+
+      echo
+      echo "Docker Compose:"
+      docker compose version
+
+
+      echo
+      echo "Memory:"
+      free -h
+
+
+      echo
+      echo "Swap:"
+      swapon --show
+
+
+      echo
+      echo "Disk:"
+      df -h /
+
+
+      echo
+      echo "Fail2ban:"
+      systemctl is-active fail2ban
+
+
+      echo
+      echo "============================================================"
+      echo "✅ Host configuration complete."
+      echo "============================================================"
+      echo
+
+
+# ============================================================
+# First-boot commands
+# ============================================================
+
+runcmd:
+
+  - /usr/local/sbin/laravel-host-setup

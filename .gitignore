@@ -1,0 +1,233 @@
+# ============================================================
+# APP Nema:
+# Git Ignore
+# ============================================================
+
+
+# ------------------------------------------------------------
+# Laravel environment / secrets
+# ------------------------------------------------------------
+
+.env
+.env.*
+!.env.example
+
+
+# ------------------------------------------------------------
+# PHP / Composer
+# ------------------------------------------------------------
+
+/vendor/
+composer.phar
+auth.json
+
+
+# ------------------------------------------------------------
+# Node / NPM
+# ------------------------------------------------------------
+
+/node_modules/
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# ------------------------------------------------------------
+# Vite
+# ------------------------------------------------------------
+
+/public/build/
+/public/hot/
+
+
+# ------------------------------------------------------------
+# Laravel runtime files
+# ------------------------------------------------------------
+
+/storage/*.key
+/storage/pail/
+
+
+# ------------------------------------------------------------
+# Logs
+# ------------------------------------------------------------
+
+*.log
+
+/storage/logs/*
+!/storage/logs/.gitignore
+
+
+# ------------------------------------------------------------
+# Laravel generated cache/session/view files
+# ------------------------------------------------------------
+
+/storage/framework/cache/*
+!/storage/framework/cache/.gitignore
+!/storage/framework/cache/data/
+
+/storage/framework/cache/data/*
+!/storage/framework/cache/data/.gitignore
+
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitignore
+
+/storage/framework/views/*
+!/storage/framework/views/.gitignore
+
+
+# ------------------------------------------------------------
+# Bootstrap cache
+# ------------------------------------------------------------
+
+/bootstrap/cache/*
+!/bootstrap/cache/.gitignore
+
+
+# ------------------------------------------------------------
+# PHPUnit / testing
+# ------------------------------------------------------------
+
+.phpunit.result.cache
+.phpunit.cache/
+coverage/
+
+
+# ------------------------------------------------------------
+# IDEs / editors
+# ------------------------------------------------------------
+
+.idea/
+.vscode/
+
+*.swp
+*.swo
+*~
+
+
+# ------------------------------------------------------------
+# Operating system files
+# ------------------------------------------------------------
+
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+
+# ------------------------------------------------------------
+# Temporary / backup files
+# ------------------------------------------------------------
+
+*.tmp
+*.temp
+*.bak
+*.backup
+
+*.orig
+
+
+# ------------------------------------------------------------
+# Local Docker overrides
+#
+# If we later create a developer-specific Compose override
+# that should NOT be shared, it can use this filename.
+# ------------------------------------------------------------
+
+compose.override.yml
+
+
+# ------------------------------------------------------------
+# Local deployment artifacts
+# ------------------------------------------------------------
+
+*.tar
+*.tar.gz
+*.zip
+
+
+# ------------------------------------------------------------
+# SSH / keys
+# ------------------------------------------------------------
+
+*.pem
+*.key
+
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+
+
+# ------------------------------------------------------------
+# Never commit production secrets or credentials
+# ------------------------------------------------------------
+
+credentials/
+secrets/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Extra Default ones
+/vendor/
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Laravel 4 specific
+bootstrap/compiled.php
+app/storage/
+
+# Laravel 5 & Lumen specific
+public/storage
+public/hot
+
+# Laravel 5 & Lumen specific with changed public path
+public_html/storage
+public_html/hot
+
+storage/*.key
+.env
+Homestead.yaml
+Homestead.json
+/.vagrant
+.phpunit.result.cache
+
+/public/build
+/storage/pail
+.env.backup
+.env.production
+.phpactor.json
+auth.json

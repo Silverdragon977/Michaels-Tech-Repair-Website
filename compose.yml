@@ -1,0 +1,500 @@
+# ============================================================
+# Michael's Tech Repair
+# Docker Compose Configuration
+#
+# Services:
+#
+#   app
+#       Laravel / PHP / Apache
+#
+#   caddy
+#       Public web server
+#       Reverse proxy
+#       Automatic HTTPS
+#
+#   mysql
+#       Optional MySQL database
+#
+# MySQL is disabled by default.
+#
+# Normal startup:
+#
+#   docker compose up -d
+#
+# Startup with MySQL:
+#
+#   docker compose --profile database up -d
+#
+# ============================================================
+
+
+# ------------------------------------------------------------
+# Compose project name
+#
+# This can be changed from .env with:
+#
+#   COMPOSE_PROJECT_NAME=myproject
+#
+# ------------------------------------------------------------
+
+name: "${COMPOSE_PROJECT_NAME:?COMPOSE_PROJECT_NAME must be defined in .env}"
+
+
+# ============================================================
+# Services
+# ============================================================
+
+services:
+
+
+  # ==========================================================
+  # Laravel Application
+  # ==========================================================
+
+  app:
+
+    # --------------------------------------------------------
+    # Build using our production Dockerfile
+    # --------------------------------------------------------
+
+    build:
+
+      context: .
+
+      dockerfile: Dockerfile
+
+
+    # --------------------------------------------------------
+    # Automatically restart after:
+    #
+    #   - Droplet reboot
+    #   - Docker restart
+    #   - unexpected container failure
+    #
+    # unless we deliberately stopped it.
+    # --------------------------------------------------------
+
+    restart: unless-stopped
+
+
+    # --------------------------------------------------------
+    # Give the container a tiny init process.
+    #
+    # This helps correctly handle child processes and signals.
+    # --------------------------------------------------------
+
+    init: true
+
+
+    # --------------------------------------------------------
+    # Load Laravel configuration
+    #
+    # This is the LOCAL .env file on whichever machine is
+    # running Docker Compose.
+    # --------------------------------------------------------
+
+    env_file:
+
+      - .env
+
+
+    # --------------------------------------------------------
+    # Required environment settings
+    #
+    # Compose will stop if these values are missing.
+    #
+    # It does NOT force local vs production because this
+    # Compose stack may also be used locally to test the
+    # production-style Docker environment.
+    # --------------------------------------------------------
+
+    environment:
+
+      APP_ENV: "${APP_ENV:?APP_ENV must be defined in .env}"
+
+      APP_DEBUG: "${APP_DEBUG:?APP_DEBUG must be defined in .env}"
+
+      APP_URL: "${APP_URL:?APP_URL must be defined in .env}"
+
+
+      # ------------------------------------------------------
+      # Safe defaults for a site that does not require MySQL.
+      #
+      # New Laravel installations may default some of these
+      # services to database-backed storage.
+      #
+      # These defaults allow Laravel to work without MySQL.
+      # ------------------------------------------------------
+
+      SESSION_DRIVER: "${SESSION_DRIVER:-file}"
+
+      CACHE_STORE: "${CACHE_STORE:-file}"
+
+      QUEUE_CONNECTION: "${QUEUE_CONNECTION:-sync}"
+
+
+      # ------------------------------------------------------
+      # Send Laravel logging to Docker logs.
+      #
+      # This works well with Docker log rotation below.
+      # ------------------------------------------------------
+
+      LOG_CHANNEL: "${LOG_CHANNEL:-stderr}"
+
+
+    # --------------------------------------------------------
+    # Laravel is visible to OTHER Docker containers only.
+    #
+    # Port 80 is NOT published to the Internet.
+    #
+    # Caddy reaches it through the internal Docker network.
+    # --------------------------------------------------------
+
+    expose:
+
+      - "80"
+
+
+    # --------------------------------------------------------
+    # Internal application network
+    # --------------------------------------------------------
+
+    networks:
+
+      - internal
+
+
+    # --------------------------------------------------------
+    # Laravel health check
+    #
+    # Laravel provides /up as its health endpoint.
+    #
+    # This checks whether Laravel is actually serving HTTP,
+    # rather than merely checking whether the container exists.
+    # --------------------------------------------------------
+
+    healthcheck:
+
+      test:
+
+        - CMD-SHELL
+
+        - curl -fsS http://localhost/up || exit 1
+
+
+      interval: 30s
+
+      timeout: 5s
+
+      retries: 3
+
+      start_period: 20s
+
+
+    # --------------------------------------------------------
+    # Docker log rotation
+    #
+    # Prevents logs from slowly consuming the Droplet disk.
+    # --------------------------------------------------------
+
+    logging:
+
+      driver: json-file
+
+      options:
+
+        max-size: "10m"
+
+        max-file: "3"
+
+
+
+  # ==========================================================
+  # Caddy
+  #
+  # Public-facing web server.
+  #
+  # Caddy handles:
+  #
+  #   HTTP
+  #   HTTPS
+  #   TLS certificates
+  #   certificate renewal
+  #   reverse proxying to Laravel
+  #
+  # ==========================================================
+
+  caddy:
+
+    image: caddy:2-alpine
+
+
+    restart: unless-stopped
+
+
+    init: true
+
+
+    # --------------------------------------------------------
+    # Wait until Laravel reports healthy before Caddy starts.
+    # --------------------------------------------------------
+
+    depends_on:
+
+      app:
+
+        condition: service_healthy
+
+
+    # --------------------------------------------------------
+    # Public ports
+    #
+    # 80:
+    #   HTTP
+    #
+    # 443/tcp:
+    #   HTTPS
+    #
+    # 443/udp:
+    #   HTTP/3
+    #
+    # These should also be allowed through the DigitalOcean
+    # Cloud Firewall.
+    # --------------------------------------------------------
+
+    ports:
+
+      - "80:80"
+
+      - "443:443"
+
+      - "443:443/udp"
+
+
+    # --------------------------------------------------------
+    # Caddy configuration and persistent TLS data
+    # --------------------------------------------------------
+
+    volumes:
+
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+
+      - caddy_data:/data
+
+      - caddy_config:/config
+
+
+    networks:
+
+      - internal
+
+
+    # --------------------------------------------------------
+    # Caddy log rotation
+    # --------------------------------------------------------
+
+    logging:
+
+      driver: json-file
+
+      options:
+
+        max-size: "10m"
+
+        max-file: "3"
+
+
+
+  # ==========================================================
+  # Optional MySQL Database
+  #
+  # This service does NOT run during a normal:
+  #
+  #   docker compose up -d
+  #
+  # Start it with:
+  #
+  #   docker compose --profile database up -d
+  #
+  # ==========================================================
+
+  mysql:
+
+    image: mysql:8.4
+
+
+    restart: unless-stopped
+
+
+    # --------------------------------------------------------
+    # Makes MySQL optional.
+    # --------------------------------------------------------
+
+    profiles:
+
+      - database
+
+
+    # --------------------------------------------------------
+    # MySQL configuration
+    #
+    # Values come from .env.
+    #
+    # Example:
+    #
+    #   DB_DATABASE=michaelstechrepair
+    #   DB_USERNAME=mtr
+    #   DB_PASSWORD=...
+    #   DB_ROOT_PASSWORD=...
+    #
+    # --------------------------------------------------------
+
+    environment:
+
+      MYSQL_DATABASE: "${DB_DATABASE:-michaelstechrepair}"
+
+      MYSQL_USER: "${DB_USERNAME:-mtr}"
+
+      MYSQL_PASSWORD: "${DB_PASSWORD:-}"
+
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD:-}"
+
+
+    # --------------------------------------------------------
+    # Small-server MySQL settings
+    #
+    # The database is expected to be tiny, so we avoid giving
+    # MySQL an unnecessarily large memory footprint.
+    # --------------------------------------------------------
+
+    command:
+
+      - "--innodb-buffer-pool-size=64M"
+
+      - "--max-connections=25"
+
+      - "--performance-schema=OFF"
+
+
+    # --------------------------------------------------------
+    # Persistent database storage
+    #
+    # The database survives replacement of the MySQL container.
+    # --------------------------------------------------------
+
+    volumes:
+
+      - mysql_data:/var/lib/mysql
+
+
+    # --------------------------------------------------------
+    # MySQL remains internal.
+    #
+    # IMPORTANT:
+    #
+    # There is deliberately NO:
+    #
+    #   ports:
+    #     - "3306:3306"
+    #
+    # MySQL should NOT be exposed to the Internet.
+    # --------------------------------------------------------
+
+    networks:
+
+      - internal
+
+
+    # --------------------------------------------------------
+    # Database health check
+    # --------------------------------------------------------
+
+    healthcheck:
+
+      test:
+
+        - CMD-SHELL
+
+        - >
+          mysqladmin ping
+          -h 127.0.0.1
+          -uroot
+          --password="$$MYSQL_ROOT_PASSWORD"
+          --silent
+
+
+      interval: 10s
+
+      timeout: 5s
+
+      retries: 5
+
+      start_period: 30s
+
+
+    # --------------------------------------------------------
+    # MySQL Docker log rotation
+    # --------------------------------------------------------
+
+    logging:
+
+      driver: json-file
+
+      options:
+
+        max-size: "10m"
+
+        max-file: "3"
+
+
+
+# ============================================================
+# Networks
+# ============================================================
+
+networks:
+
+
+  # ----------------------------------------------------------
+  # Private Docker network
+  #
+  # Caddy can reach Laravel.
+  #
+  # Laravel can reach MySQL when MySQL is enabled.
+  #
+  # None of these internal service ports are directly exposed
+  # to the Internet.
+  # ----------------------------------------------------------
+
+  internal:
+
+    driver: bridge
+
+
+
+# ============================================================
+# Persistent Volumes
+# ============================================================
+
+volumes:
+
+
+  # ----------------------------------------------------------
+  # Stores Caddy certificates and other persistent data.
+  # ----------------------------------------------------------
+
+  caddy_data:
+
+
+  # ----------------------------------------------------------
+  # Stores Caddy internal configuration/state.
+  # ----------------------------------------------------------
+
+  caddy_config:
+
+
+  # ----------------------------------------------------------
+  # Stores MySQL database data.
+  # ----------------------------------------------------------
+
+  mysql_data:
