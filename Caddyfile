@@ -1,0 +1,30 @@
+# ============================================================
+# Generic Laravel Caddy Configuration
+#
+# APP_DOMAIN is supplied by Docker Compose from .env.
+#
+# Example:
+#
+#   APP_DOMAIN=example.com
+#
+# Caddy automatically handles HTTPS certificates when the
+# domain resolves to this server and ports 80/443 are open.
+# ============================================================
+
+
+{$APP_DOMAIN} {
+
+    # --------------------------------------------------------
+    # Compress compatible responses
+    # --------------------------------------------------------
+
+    encode zstd gzip
+
+
+    # --------------------------------------------------------
+    # Laravel/PHP/Apache container
+    # --------------------------------------------------------
+
+    reverse_proxy app:80
+
+}

@@ -4,63 +4,39 @@ set -Eeuo pipefail
 
 
 # ============================================================
-# Generic Laravel Application Template
-# Laravel Setup Script
+# Generic Laravel Application Setup
 #
 # Purpose:
 #
-#   - Install a fresh Laravel application into this template
-#   - Preserve files already provided by the template
-#   - Install Composer dependencies
-#   - Ensure .env exists
-#   - Generate APP_KEY when necessary
+#   - Verify PHP and Composer
+#   - Create Laravel if it does not exist
+#   - Merge Laravel into the reusable template
+#   - Preserve existing template files
+#   - Install PHP dependencies
+#   - Create .env when needed
+#   - Configure safe Laravel runtime defaults
+#   - Generate APP_KEY
 #   - Create a generic Caddyfile
-#   - Verify Laravel can start
+#   - Prepare Laravel runtime directories
+#   - Clear Laravel caches
 #
-# This script is DEVELOPMENT ONLY.
-#
-# The environment policy is controlled by:
-#
-#   scripts/environmentGuard.sh
-#
-# This script intentionally does NOT:
-#
-#   - install React
-#   - install TypeScript
-#   - install Sass
-#   - run Vite
-#   - configure production
-#   - configure deployment users
-#   - configure GitHub
-#   - run database migrations
-#
-# Those responsibilities belong to other setup scripts.
+# This script is intended for DEVELOPMENT setup.
 # ============================================================
 
 
-# ------------------------------------------------------------
-# Find script directory
-# ------------------------------------------------------------
+# ============================================================
+# Locate project
+# ============================================================
 
 SCRIPT_DIR="$(
     cd "$(dirname "${BASH_SOURCE[0]}")"
     pwd
 )"
 
-
-# ------------------------------------------------------------
-# Find project root
-#
-# Expected location:
-#
-#   PROJECT_ROOT/scripts/setup-laravel.sh
-# ------------------------------------------------------------
-
 PROJECT_ROOT="$(
     cd "$SCRIPT_DIR/.."
     pwd
 )"
-
 
 cd "$PROJECT_ROOT"
 
@@ -73,7 +49,7 @@ die() {
 
     echo
     echo "============================================================"
-    echo "❌ Laravel setup failed"
+    echo "❌ LARAVEL SETUP FAILED"
     echo "============================================================"
     echo
     echo "$*"
@@ -97,36 +73,73 @@ ok() {
 }
 
 
-# ============================================================
-# Do not run as root
-# ============================================================
-
-if [[ "$EUID" -eq 0 ]]; then
-
-    die "Do not run setup-laravel.sh with sudo.
-
-Run it as your normal development user."
-
-fi
-
-
-# ============================================================
-# Existing environment protection
+# ------------------------------------------------------------
+# Add or replace KEY=value inside an env-style file.
 #
-# If .env already exists, check the environment BEFORE doing
-# anything.
-#
-# If .env does not exist yet, Laravel has not necessarily been
-# installed, so the guardian cannot run yet.
-#
-# We run it again later after .env has been created.
-# ============================================================
+# This is more reliable than sed alone because the variable
+# will also be added if Laravel's default .env does not already
+# contain it.
+# ------------------------------------------------------------
 
-if [[ -f "$PROJECT_ROOT/.env" ]]; then
+set_env_value() {
 
-    source "$SCRIPT_DIR/environmentGuard.sh"
+    local FILE="$1"
+    local KEY="$2"
+    local VALUE="$3"
+    local TEMP_FILE=""
 
-fi
+
+    touch "$FILE"
+
+
+    TEMP_FILE="$(mktemp)"
+
+
+    awk \
+        -v key="$KEY" \
+        -v value="$VALUE" \
+        '
+        BEGIN {
+            found = 0
+        }
+
+        $0 ~ "^[[:space:]]*" key "[[:space:]]*=" {
+
+            if (!found) {
+
+                print key "=" value
+
+                found = 1
+
+            }
+
+            next
+        }
+
+        {
+            print
+        }
+
+        END {
+
+            if (!found) {
+
+                print key "=" value
+
+            }
+
+        }
+        ' \
+        "$FILE" \
+        > "$TEMP_FILE"
+
+
+    cat "$TEMP_FILE" > "$FILE"
+
+
+    rm -f "$TEMP_FILE"
+
+}
 
 
 # ============================================================
@@ -141,21 +154,45 @@ echo
 
 
 # ============================================================
-# Prerequisite checks
+# Do not run as root
+# ============================================================
+
+if [[ "${EUID}" -eq 0 ]]; then
+
+    die "Do not run setup-laravel.sh as root.
+
+Run it as your normal development user."
+
+fi
+
+
+# ============================================================
+# If .env already exists, protect the script immediately.
+#
+# On a brand-new template .env may not exist yet, so the
+# environment guard cannot be used until after Laravel creates
+# or receives an environment file.
+# ============================================================
+
+if [[ -f "$PROJECT_ROOT/.env" ]]; then
+
+    source "$SCRIPT_DIR/environmentGuard.sh"
+
+fi
+
+
+# ============================================================
+# Development prerequisites
 # ============================================================
 
 echo "🔎 Checking development prerequisites..."
 
 
-# ------------------------------------------------------------
-# PHP
-# ------------------------------------------------------------
-
 if ! command -v php >/dev/null 2>&1; then
 
     die "PHP was not found.
 
-Install PHP before running the application setup."
+Install PHP before running Laravel setup."
 
 fi
 
@@ -169,15 +206,11 @@ PHP_VERSION="$(
 ok "PHP found: $PHP_VERSION"
 
 
-# ------------------------------------------------------------
-# Composer
-# ------------------------------------------------------------
-
 if ! command -v composer >/dev/null 2>&1; then
 
     die "Composer was not found.
 
-Install Composer before running the application setup."
+Install Composer before running Laravel setup."
 
 fi
 
@@ -193,30 +226,26 @@ ok "$COMPOSER_VERSION"
 
 
 # ============================================================
-# Determine whether Laravel already exists
+# Detect existing Laravel application
 # ============================================================
+
+LARAVEL_EXISTS="false"
+
 
 if [[ -f "$PROJECT_ROOT/artisan" ]] \
     && [[ -f "$PROJECT_ROOT/composer.json" ]]
 then
 
-    echo
-    info "Existing Laravel application detected."
-
-    LARAVEL_ALREADY_EXISTS=true
-
-else
-
-    LARAVEL_ALREADY_EXISTS=false
+    LARAVEL_EXISTS="true"
 
 fi
 
 
 # ============================================================
-# Create Laravel skeleton when necessary
+# Create Laravel skeleton if needed
 # ============================================================
 
-if [[ "$LARAVEL_ALREADY_EXISTS" == false ]]; then
+if [[ "$LARAVEL_EXISTS" == "false" ]]; then
 
     echo
     echo "============================================================"
@@ -225,33 +254,10 @@ if [[ "$LARAVEL_ALREADY_EXISTS" == false ]]; then
     echo
 
 
-    # --------------------------------------------------------
-    # Temporary working directory
-    #
-    # We cannot use:
-    #
-    #   composer create-project laravel/laravel .
-    #
-    # because the template repository is already non-empty.
-    #
-    # Instead:
-    #
-    #   1. Laravel is downloaded into a temporary directory.
-    #   2. Missing Laravel files are merged into this repo.
-    #   3. Existing template files are NOT overwritten.
-    # --------------------------------------------------------
-
-    TEMP_ROOT="$(
-        mktemp -d
-    )"
-
+    TEMP_ROOT="$(mktemp -d)"
 
     TEMP_LARAVEL="$TEMP_ROOT/laravel"
 
-
-    # --------------------------------------------------------
-    # Always clean temporary files when the script exits.
-    # --------------------------------------------------------
 
     cleanup() {
 
@@ -259,9 +265,7 @@ if [[ "$LARAVEL_ALREADY_EXISTS" == false ]]; then
             && [[ -d "${TEMP_ROOT:-}" ]]
         then
 
-            rm \
-                -rf \
-                "$TEMP_ROOT"
+            rm -rf "$TEMP_ROOT"
 
         fi
 
@@ -277,20 +281,22 @@ if [[ "$LARAVEL_ALREADY_EXISTS" == false ]]; then
     # --------------------------------------------------------
     # --no-install
     #
-    # Only obtain the Laravel application skeleton here.
+    # We only want Laravel's skeleton here. Dependencies will
+    # be installed after the skeleton is merged into the real
+    # project.
     #
-    # Dependencies will be installed AFTER the application has
-    # been safely merged into our template repository.
+    # --no-scripts
     #
-    # --no-interaction
-    #
-    # Keeps setup automatic.
+    # Recent Laravel versions try to run Artisan during the
+    # create-project lifecycle. Artisan cannot run yet because
+    # --no-install means vendor/autoload.php does not exist.
     # --------------------------------------------------------
 
     composer create-project \
         laravel/laravel \
         "$TEMP_LARAVEL" \
         --no-install \
+        --no-scripts \
         --no-interaction
 
 
@@ -298,31 +304,20 @@ if [[ "$LARAVEL_ALREADY_EXISTS" == false ]]; then
 
 
     # --------------------------------------------------------
-    # Merge Laravel into existing template
+    # Merge Laravel into the reusable template.
     #
-    # --archive
-    #     Recursively preserve normal file attributes.
+    # --no-clobber preserves files already supplied by this
+    # template, such as:
     #
-    # --no-clobber
-    #     NEVER overwrite an existing template file.
-    #
-    # This protects files we already created such as:
-    #
-    #   .gitignore
-    #   .dockerignore
     #   Dockerfile
     #   compose.yml
-    #   cloud-init-prod-only.yml
-    #   deploy.sh
-    #   scripts/
-    #
-    # Hidden Laravel files are included because source is:
-    #
-    #   "$TEMP_LARAVEL"/.
+    #   .gitignore
+    #   .dockerignore
+    #   setup scripts
     # --------------------------------------------------------
 
     echo
-    echo "📂 Merging Laravel into template..."
+    echo "📁 Merging Laravel into project..."
 
 
     cp \
@@ -332,40 +327,57 @@ if [[ "$LARAVEL_ALREADY_EXISTS" == false ]]; then
         "$PROJECT_ROOT"/
 
 
-    ok "Laravel files merged without overwriting template files."
+    ok "Laravel skeleton merged."
+
+
+    # --------------------------------------------------------
+    # Cleanup temporary Laravel download
+    # --------------------------------------------------------
+
+    cleanup
+
+    trap - EXIT
 
 
 else
 
-    echo
-    echo "ℹ️ Laravel installation step skipped."
+    info "Existing Laravel application detected."
+
+    info "Laravel skeleton creation skipped."
 
 fi
 
 
 # ============================================================
-# Verify required Laravel files now exist
+# Verify required Laravel files
 # ============================================================
+
+echo
+echo "🔎 Verifying Laravel files..."
+
 
 if [[ ! -f "$PROJECT_ROOT/artisan" ]]; then
 
-    die "Laravel artisan was not created."
+    die "Laravel artisan file is missing."
 
 fi
 
 
 if [[ ! -f "$PROJECT_ROOT/composer.json" ]]; then
 
-    die "Laravel composer.json was not created."
+    die "Laravel composer.json is missing."
 
 fi
 
 
 if [[ ! -f "$PROJECT_ROOT/.env.example" ]]; then
 
-    die "Laravel .env.example was not created."
+    die "Laravel .env.example is missing."
 
 fi
+
+
+ok "Required Laravel files are present."
 
 
 # ============================================================
@@ -373,13 +385,7 @@ fi
 # ============================================================
 
 echo
-echo "============================================================"
-echo "  Installing Laravel Dependencies"
-echo "============================================================"
-echo
-
-
-echo "📦 Running Composer install..."
+echo "📦 Installing Composer dependencies..."
 
 
 composer install \
@@ -391,19 +397,19 @@ ok "Composer dependencies installed."
 
 
 # ============================================================
-# Create .env
+# Create .env if needed
 # ============================================================
 
 echo
 echo "============================================================"
-echo "  Laravel Environment"
+echo "  Environment File"
 echo "============================================================"
 echo
 
 
 if [[ ! -f "$PROJECT_ROOT/.env" ]]; then
 
-    echo "⚙️ Creating .env from Laravel's .env.example..."
+    echo "⚙️ Creating .env from .env.example..."
 
 
     cp \
@@ -420,44 +426,94 @@ if [[ ! -f "$PROJECT_ROOT/.env" ]]; then
 
 else
 
-    info ".env already exists."
+    info "Existing .env preserved."
 
 fi
 
 
 # ============================================================
-# NOW enforce development environment
+# Configure Laravel runtime defaults
 #
-# At this point .env is guaranteed to exist.
+# Recent Laravel versions commonly use database-backed cache,
+# sessions, and queues.
 #
-# Fresh Laravel uses APP_ENV=local, so a new development
-# installation will pass.
+# The reusable template should be able to initialize and run
+# setup without needing a database connection first.
+#
+# These settings do NOT prevent the application itself from
+# using MySQL later.
+#
+# Application data:
+#   MySQL
+#
+# Sessions:
+#   files
+#
+# Cache:
+#   files
+#
+# Queue:
+#   synchronous
+# ============================================================
+
+echo
+echo "⚙️ Configuring Laravel runtime defaults..."
+
+
+set_env_value \
+    "$PROJECT_ROOT/.env" \
+    "SESSION_DRIVER" \
+    "file"
+
+
+set_env_value \
+    "$PROJECT_ROOT/.env" \
+    "CACHE_STORE" \
+    "file"
+
+
+set_env_value \
+    "$PROJECT_ROOT/.env" \
+    "QUEUE_CONNECTION" \
+    "sync"
+
+
+ok "Laravel runtime defaults configured."
+
+
+# ============================================================
+# Environment guard
+#
+# .env now definitely exists, so environmentGuard.sh can
+# safely verify APP_ENV.
 # ============================================================
 
 source "$SCRIPT_DIR/environmentGuard.sh"
 
 
 # ============================================================
-# Laravel application key
+# Generate APP_KEY if needed
 # ============================================================
 
 echo
 echo "🔑 Checking Laravel APP_KEY..."
 
 
-APP_KEY="$(
+CURRENT_APP_KEY="$(
     grep \
-        -E '^APP_KEY=' \
+        '^APP_KEY=' \
         "$PROJECT_ROOT/.env" \
-        | tail -n 1 \
+        2>/dev/null \
+        | head -n 1 \
         | cut -d= -f2- \
         || true
 )"
 
 
-if [[ -z "$APP_KEY" ]]; then
+if [[ -z "$CURRENT_APP_KEY" ]]; then
 
-    echo "🔑 Generating Laravel application key..."
+    echo
+    echo "🔑 Generating Laravel APP_KEY..."
 
 
     php artisan key:generate \
@@ -468,31 +524,15 @@ if [[ -z "$APP_KEY" ]]; then
 
 else
 
-    info "Laravel APP_KEY already exists."
+    info "APP_KEY already exists."
 
-    info "Existing key will NOT be replaced."
+    info "Existing APP_KEY preserved."
 
 fi
 
 
 # ============================================================
-# Generic Caddyfile
-#
-# No application-specific domain is stored here.
-#
-# Caddy receives APP_DOMAIN from Docker Compose / .env.
-#
-# Example production .env:
-#
-#   APP_DOMAIN=example.com
-#
-# Caddy syntax:
-#
-#   {$APP_DOMAIN}
-#
-# means:
-#
-#   read APP_DOMAIN from the container environment.
+# Caddy configuration
 # ============================================================
 
 echo
@@ -511,32 +551,13 @@ if [[ ! -f "$CADDY_FILE" ]]; then
 
 
     cat > "$CADDY_FILE" <<'EOF'
-# ============================================================
 # Generic Laravel Caddy Configuration
 #
-# APP_DOMAIN is supplied by Docker Compose from .env.
-#
-# Example:
-#
-#   APP_DOMAIN=example.com
-#
-# Caddy automatically handles HTTPS certificates when the
-# domain resolves to this server and ports 80/443 are open.
-# ============================================================
-
+# APP_DOMAIN is passed to Caddy by Docker Compose.
 
 {$APP_DOMAIN} {
 
-    # --------------------------------------------------------
-    # Compress compatible responses
-    # --------------------------------------------------------
-
     encode zstd gzip
-
-
-    # --------------------------------------------------------
-    # Laravel/PHP/Apache container
-    # --------------------------------------------------------
 
     reverse_proxy app:80
 
@@ -548,35 +569,32 @@ EOF
 
 else
 
-    info "Existing Caddyfile detected."
-
-    info "It will NOT be overwritten."
+    info "Existing Caddyfile preserved."
 
 fi
 
 
 # ============================================================
-# Laravel writable directories
+# Laravel runtime directories
 # ============================================================
 
 echo
 echo "📁 Checking Laravel runtime directories..."
 
 
-mkdir \
-    -p \
-    storage/framework/cache/data \
-    storage/framework/sessions \
-    storage/framework/views \
-    storage/logs \
-    bootstrap/cache
+mkdir -p \
+    "$PROJECT_ROOT/storage/framework/cache/data" \
+    "$PROJECT_ROOT/storage/framework/sessions" \
+    "$PROJECT_ROOT/storage/framework/views" \
+    "$PROJECT_ROOT/storage/logs" \
+    "$PROJECT_ROOT/bootstrap/cache"
 
 
 ok "Laravel runtime directories exist."
 
 
 # ============================================================
-# Clear stale Laravel caches
+# Clear Laravel caches
 # ============================================================
 
 echo
@@ -595,40 +613,31 @@ ok "Laravel caches cleared."
 
 echo
 echo "============================================================"
-echo "  Verifying Laravel"
+echo "  Laravel Verification"
 echo "============================================================"
 echo
 
-
-# ------------------------------------------------------------
-# Artisan must successfully boot the Laravel application.
-# ------------------------------------------------------------
 
 php artisan about \
     --only=environment
 
 
-ok "Laravel successfully booted."
+ok "Laravel application booted successfully."
 
 
 # ============================================================
-# Detect Laravel's original JavaScript Vite configuration
+# Detect Laravel's default Vite config
 #
-# Our setup-frontend.sh will create:
-#
-#   vite.config.ts
-#
-# We leave Laravel's original file alone here so Laravel setup
-# remains independent of frontend setup.
-#
-# setup-frontend.sh should remove the old vite.config.js when
-# it creates vite.config.ts.
+# setup-frontend.sh will replace the default JavaScript config
+# with vite.config.ts.
 # ============================================================
 
-if [[ -f "$PROJECT_ROOT/vite.config.js" ]]; then
+if [[ -f "$PROJECT_ROOT/vite.config.js" ]] \
+    || [[ -f "$PROJECT_ROOT/vite.config.mjs" ]]
+then
 
     echo
-    info "Laravel default vite.config.js detected."
+    info "Laravel default Vite configuration detected."
 
     info "setup-frontend.sh will replace it with vite.config.ts."
 
@@ -636,54 +645,29 @@ fi
 
 
 # ============================================================
-# Finish
+# Complete
 # ============================================================
 
 echo
 echo "============================================================"
-echo "✅ Laravel setup complete!"
+echo "✅ Laravel setup complete"
 echo "============================================================"
 echo
 
 
-echo "Laravel:"
+echo "Laravel root:"
 echo
-php artisan \
-    --version
+echo "  $PROJECT_ROOT"
+echo
 
 
-echo
 echo "Environment:"
 echo
-echo "  Development"
-
-
+echo "  development"
 echo
-echo "Created/verified:"
-echo
-echo "  artisan"
-echo "  composer.json"
-echo "  vendor/"
-echo "  .env.example"
-echo "  .env"
-echo "  APP_KEY"
-echo "  Caddyfile"
-echo "  Laravel runtime directories"
 
 
-echo
-echo "The next setup stage is:"
+echo "Next setup stage:"
 echo
 echo "  scripts/setup-frontend.sh"
-echo
-
-
-echo "That script will configure:"
-echo
-echo "  React"
-echo "  TypeScript"
-echo "  SCSS"
-echo "  Vite"
-echo "  Blade template"
-echo "  React example component"
 echo
