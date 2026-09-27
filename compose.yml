@@ -234,6 +234,8 @@ services:
 
     init: true
 
+    environment:
+      APP_DOMAIN: "${APP_DOMAIN:?APP_DOMAIN must be defined in .env}"
 
     # --------------------------------------------------------
     # Wait until Laravel reports healthy before Caddy starts.
