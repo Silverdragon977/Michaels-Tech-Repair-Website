@@ -96,7 +96,7 @@
 
             <div class="service-grid">
 
-                @for ($i = 1; $i <= 6; $i++)
+                @for ($i = 1; $i <= 9; $i++)
 
                     <article class="service-card">
 
@@ -107,15 +107,72 @@
                         <div class="service-card__content">
 
                             <h3>
-                                Service {{ $i }}
+
+
+                                {{-- Later on make a key value pair and index with value instead of using multiple if-else statements. --}}
+                                <?php if ($i == 1 ) {
+                                    echo 'Computer Repair';
+                                } elseif ($i == 2) {
+                                    echo 'Virus Removal';
+                                } elseif ($i == 3) {
+                                    echo 'Home Tech Setup';
+                                } elseif ($i == 4) {
+                                    echo 'Troubleshooting Devices';
+                                } elseif ($i == 5) {
+                                    echo 'Website Creation & Maintenance';
+                                } elseif ($i == 6) {
+                                    echo 'PC Builds & Upgrades';
+                                } elseif ($i == 7) {
+                                    echo 'Media Server Setup';
+                                } elseif ($i == 8) {
+                                    echo 'Network Setup';
+                                } elseif ($i == 9) {
+                                    echo 'Cloud & Server Administration';
+                                }?>
                             </h3>
 
                             <p>
-                                Placeholder service description.
+                                <?php if ($i == 1 ) {
+                                    echo 'Description for Computer Repair';
+                                } elseif ($i == 2) {
+                                    echo 'Description for Virus Removal';
+                                } elseif ($i == 3) {
+                                    echo 'Description for Home Tech Setup';
+                                } elseif ($i == 4) {
+                                    echo 'Description for Troubleshooting Devices';
+                                } elseif ($i == 5) {
+                                    echo 'Description for Website Creation & Maintenance';
+                                } elseif ($i == 6) {
+                                    echo 'Description for PC Builds & Upgrades';
+                                } elseif ($i == 7) {
+                                    echo 'Description for Media Server Setup';
+                                } elseif ($i == 8) {
+                                    echo 'Description for Network Setup';
+                                } elseif ($i == 9) {
+                                    echo 'Description for Cloud & Server Administration';
+                                }?>
                             </p>
 
                             <a href="#">
-                                Learn More
+                                <?php if ($i == 1 ) {
+                                    echo '<a href="{{  }}">Learn more</a>';
+                                } elseif ($i == 2) {
+                                    echo '<a href="{{  }}">Learn more</a>';
+                                } elseif ($i == 3) {
+                                    echo '<a href="{{  }}">Learn more</a>';
+                                } elseif ($i == 4) {
+                                    echo '<a href="{{  }}">Learn more</a>';
+                                } elseif ($i == 5) {
+                                    echo '<a href="{{  }}">Learn more</a>';
+                                } elseif ($i == 6) {
+                                    echo '<a href="{{  }}">Learn more</a>';
+                                } elseif ($i == 7) {
+                                    echo '<a href="{{  }}">Learn more</a>';
+                                } elseif ($i == 8) {
+                                    echo '<a href="{{  }}">Learn more</a>';
+                                } elseif ($i == 9) {
+                                    echo '<a href="{{  }}">Learn more</a>';
+                                }?>
                             </a>
 
                         </div>

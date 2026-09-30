@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Service | Michael\'s Tech Repair')
+@section('title', ($title ?? 'Service') . " | Michael's Tech Repair")
 
 @section('content')
 
@@ -16,29 +16,28 @@
             <div class="service-hero__content">
 
                 <span class="service-hero__eyebrow">
-                    Service
+                    {{ $eyebrow ?? 'Service' }}
                 </span>
 
                 <h1 class="service-hero__title">
-                    Service Name
+                    {{ $title ?? 'Service Name' }}
                 </h1>
 
                 <p class="service-hero__description">
-                    Placeholder service description.
+                    {{ $description ?? 'Service description goes here.' }}
                 </p>
-
 
                 <div class="service-hero__actions">
 
                     <a
-                        href="#"
+                        href="/contact"
                         class="button button--primary"
                     >
                         Request Help
                     </a>
 
                     <a
-                        href="#"
+                        href="/contact"
                         class="button button--secondary"
                     >
                         Contact Me
@@ -46,234 +45,256 @@
 
                 </div>
 
+                @if (!empty($meta))
 
-                <div class="service-hero__meta">
-                    Placeholder • Placeholder • Placeholder
-                </div>
+                    <div class="service-hero__meta">
+                        {{ $meta }}
+                    </div>
+
+                @endif
 
             </div>
 
         </div>
 
     </section>
-
 
 
     {{-- ======================================
         COMMON PROBLEMS
     ======================================= --}}
-    <section class="section service-problems">
+    @if (!empty($problems))
 
-        <div class="page-container">
+        <section class="section service-problems">
 
-            <header class="section-heading">
+            <div class="page-container">
 
-                <span class="section-heading__eyebrow">
-                    Common Issues
-                </span>
+                <header class="section-heading">
 
-                <h2 class="section-heading__title">
-                    Problems I Can Help With
-                </h2>
+                    <span class="section-heading__eyebrow">
+                        Common Issues
+                    </span>
 
-            </header>
+                    <h2 class="section-heading__title">
+                        Problems I Can Help With
+                    </h2>
+
+                </header>
 
 
-            <div class="service-problem-grid">
+                <div class="service-problem-grid">
 
-                @for ($i = 1; $i <= 6; $i++)
+                    @foreach ($problems as $problem)
 
-                    <article class="service-problem-card">
+                        <article class="service-problem-card">
 
-                        <div class="placeholder placeholder--icon">
-                            Icon
-                        </div>
+                            <div class="placeholder placeholder--icon">
+                                {{ $problem['icon'] ?? 'Icon' }}
+                            </div>
 
-                        <h3>
-                            Problem {{ $i }}
-                        </h3>
+                            <h3>
+                                {{ $problem['title'] }}
+                            </h3>
 
-                        <p>
-                            Placeholder description.
-                        </p>
+                            <p>
+                                {{ $problem['description'] }}
+                            </p>
 
-                    </article>
+                        </article>
 
-                @endfor
+                    @endforeach
+
+                </div>
 
             </div>
 
-        </div>
+        </section>
 
-    </section>
-
+    @endif
 
 
     {{-- ======================================
         SERVICE DETAILS
     ======================================= --}}
-    <section class="section service-details">
+    @if (!empty($included))
 
-        <div class="page-container">
+        <section class="section service-details">
 
-            <div class="service-details__grid">
+            <div class="page-container">
 
-                <div class="service-details__content">
+                <div class="service-details__grid">
 
-                    <span class="section-heading__eyebrow">
-                        Service Details
-                    </span>
+                    <div class="service-details__content">
 
-                    <h2>
-                        What's Included
-                    </h2>
+                        <span class="section-heading__eyebrow">
+                            Service Details
+                        </span>
 
-
-                    <ul class="service-checklist">
-
-                        @for ($i = 1; $i <= 8; $i++)
-
-                            <li>
-                                Placeholder service item
-                            </li>
-
-                        @endfor
-
-                    </ul>
-
-                </div>
+                        <h2>
+                            What's Included
+                        </h2>
 
 
-                <div class="service-details__media">
+                        <ul class="service-checklist">
 
-                    <div class="placeholder placeholder--image">
-                        Service Image
+                            @foreach ($included as $item)
+
+                                <li>
+                                    {{ $item }}
+                                </li>
+
+                            @endforeach
+
+                        </ul>
+
+                    </div>
+
+
+                    <div class="service-details__media">
+
+                        <div class="placeholder placeholder--image">
+                            {{ $imageLabel ?? 'Service Image' }}
+                        </div>
+
                     </div>
 
                 </div>
 
             </div>
 
-        </div>
+        </section>
 
-    </section>
-
+    @endif
 
 
     {{-- ======================================
         PROCESS
     ======================================= --}}
-    <section class="section service-process">
+    @if (!empty($process))
 
-        <div class="page-container">
+        <section class="section service-process">
 
-            <header class="section-heading">
+            <div class="page-container">
 
-                <span class="section-heading__eyebrow">
-                    Process
-                </span>
+                <header class="section-heading">
 
-                <h2>
-                    How It Works
-                </h2>
+                    <span class="section-heading__eyebrow">
+                        Process
+                    </span>
 
-            </header>
+                    <h2 class="section-heading__title">
+                        How It Works
+                    </h2>
+
+                </header>
 
 
-            <div class="process-grid">
+                <div class="process-grid">
 
-                @for ($i = 1; $i <= 4; $i++)
+                    @foreach ($process as $index => $step)
 
-                    <article class="process-step">
+                        <article class="process-step">
 
-                        <div class="process-step__number">
-                            {{ $i }}
-                        </div>
+                            <div class="process-step__number">
+                                {{ $index + 1 }}
+                            </div>
 
-                        <h3>
-                            Step {{ $i }}
-                        </h3>
+                            <h3>
+                                {{ $step['title'] }}
+                            </h3>
 
-                        <p>
-                            Placeholder description.
-                        </p>
+                            <p>
+                                {{ $step['description'] }}
+                            </p>
 
-                    </article>
+                        </article>
 
-                @endfor
+                    @endforeach
+
+                </div>
 
             </div>
 
-        </div>
+        </section>
 
-    </section>
-
+    @endif
 
 
     {{-- ======================================
         PRICING / FAQ
     ======================================= --}}
-    <section class="section service-info">
+    @if (!empty($pricing) || !empty($faq))
 
-        <div class="page-container">
+        <section class="section service-info">
 
-            <div class="service-info__grid">
+            <div class="page-container">
 
-                <section class="service-pricing">
+                <div class="service-info__grid">
 
-                    <h2>
-                        Pricing
-                    </h2>
+                    @if (!empty($pricing))
 
-                    @for ($i = 1; $i <= 3; $i++)
+                        <section class="service-pricing">
 
-                        <div class="pricing-row">
+                            <h2>
+                                Pricing
+                            </h2>
 
-                            <span>
-                                Placeholder
-                            </span>
+                            @foreach ($pricing as $price)
 
-                            <span>
-                                $XX
-                            </span>
+                                <div class="pricing-row">
 
-                        </div>
+                                    <span>
+                                        {{ $price['name'] }}
+                                    </span>
 
-                    @endfor
+                                    <span>
+                                        {{ $price['price'] }}
+                                    </span>
 
-                </section>
+                                </div>
+
+                            @endforeach
+
+                        </section>
+
+                    @endif
 
 
-                <section class="service-faq">
+                    @if (!empty($faq))
 
-                    <h2>
-                        FAQ
-                    </h2>
+                        <section class="service-faq">
 
-                    @for ($i = 1; $i <= 5; $i++)
+                            <h2>
+                                FAQ
+                            </h2>
 
-                        <details class="faq-item">
+                            @foreach ($faq as $item)
 
-                            <summary>
-                                Question {{ $i }}
-                            </summary>
+                                <details class="faq-item">
 
-                            <p>
-                                Placeholder answer.
-                            </p>
+                                    <summary>
+                                        {{ $item['question'] }}
+                                    </summary>
 
-                        </details>
+                                    <p>
+                                        {{ $item['answer'] }}
+                                    </p>
 
-                    @endfor
+                                </details>
 
-                </section>
+                            @endforeach
+
+                        </section>
+
+                    @endif
+
+                </div>
 
             </div>
 
-        </div>
+        </section>
 
-    </section>
-
+    @endif
 
 
     {{-- ======================================
@@ -286,28 +307,28 @@
             <div class="service-contact__content">
 
                 <h2>
-                    Need Help?
+                    {{ $ctaTitle ?? 'Need Help?' }}
                 </h2>
 
                 <p>
-                    Placeholder contact text.
+                    {{ $ctaText ?? 'Tell me what you are dealing with and I can help figure out the next step.' }}
                 </p>
 
 
                 <div class="service-contact__actions">
 
                     <a
-                        href="#"
+                        href="/contact"
                         class="button button--primary"
                     >
                         Contact Form
                     </a>
 
                     <a
-                        href="#"
+                        href="/services"
                         class="button button--secondary"
                     >
-                        Email
+                        View Other Services
                     </a>
 
                 </div>
