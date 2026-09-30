@@ -1,0 +1,265 @@
+@use '../ui-elements/tokens' as t;
+
+
+// ==========================================
+// SERVICE HERO
+// ==========================================
+
+.service-hero {
+    min-height:
+        620px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+}
+
+.service-hero__content {
+    max-width:
+        850px;
+
+    margin-inline:
+        auto;
+
+    text-align:
+        center;
+}
+
+.service-hero__actions {
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    gap:
+        1rem;
+
+    margin-top:
+        2rem;
+}
+
+.service-hero__meta {
+    margin-top:
+        2rem;
+}
+
+
+// ==========================================
+// COMMON PROBLEMS
+// ==========================================
+
+.service-problem-grid {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        1.5rem;
+}
+
+.service-problem-card {
+    min-height:
+        180px;
+
+    padding:
+        2rem;
+}
+
+
+// ==========================================
+// SERVICE DETAILS
+// ==========================================
+
+.service-details__grid {
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    align-items:
+        center;
+
+    gap:
+        4rem;
+}
+
+.service-checklist {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap:
+        1rem;
+}
+
+.service-details__media {
+    min-height:
+        400px;
+}
+
+
+// ==========================================
+// PROCESS
+// ==========================================
+
+.process-grid {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap:
+        2rem;
+}
+
+.process-step {
+    text-align:
+        center;
+
+    padding:
+        1.5rem;
+}
+
+
+// ==========================================
+// PRICING + FAQ
+// ==========================================
+
+.service-info__grid {
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        3rem;
+}
+
+.service-pricing,
+.service-faq {
+    padding:
+        2rem;
+}
+
+.pricing-row {
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    gap:
+        2rem;
+
+    padding-block:
+        1rem;
+}
+
+
+// ==========================================
+// CONTACT CTA
+// ==========================================
+
+.service-contact__content {
+    max-width:
+        800px;
+
+    margin-inline:
+        auto;
+
+    text-align:
+        center;
+}
+
+.service-contact__actions {
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    gap:
+        1rem;
+
+    margin-top:
+        2rem;
+}
+
+
+// ==========================================
+// TABLET
+// ==========================================
+
+@media (max-width: t.$tablet) {
+
+    .service-problem-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .service-details__grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .process-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .service-info__grid {
+        grid-template-columns:
+            1fr;
+    }
+}
+
+
+// ==========================================
+// MOBILE
+// ==========================================
+
+@media (max-width: t.$mobile) {
+
+    .service-hero {
+        min-height:
+            auto;
+
+        padding-block:
+            5rem;
+    }
+
+    .service-hero__actions {
+        flex-direction:
+            column;
+    }
+
+    .service-problem-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .service-checklist {
+        grid-template-columns:
+            1fr;
+    }
+
+    .process-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .service-contact__actions {
+        flex-direction:
+            column;
+    }
+}

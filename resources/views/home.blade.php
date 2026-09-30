@@ -1,174 +1,331 @@
-@extends('bladeTemplate')
-
-
-@section('title', "Michael's Tech Repair")
-
+@extends('layouts.app')
 
 @section('content')
 
+<main class="home">
 
- <main class="home-page">
+    {{-- =====================================================
+        HERO
+    ====================================================== --}}
+    <section class="hero">
 
-        <section class="hero">
+        <div class="page-container">
+
+            <header class="site-header">
+
+                <div class="site-header__brand">
+                    <div class="placeholder placeholder--logo">
+                        Logo
+                    </div>
+
+                    <span>Michael's Tech Repair</span>
+                </div>
+
+                <nav class="site-header__nav">
+                    <a href="#">Home</a>
+                    <a href="#">Services</a>
+                    <a href="#">About</a>
+                    <a href="#">Contact</a>
+                </nav>
+
+                <div class="site-header__action">
+                    <a href="#" class="button button--primary">
+                        Get Help
+                    </a>
+                </div>
+
+            </header>
+
 
             <div class="hero__content">
 
-                <p class="hero__eyebrow">
-                    Local Tech Help • Web Development • Cloud
-                </p>
+                <div class="hero__eyebrow">
+                    Placeholder eyebrow
+                </div>
 
                 <h1 class="hero__title">
-                    Technology that works for you.
+                    Placeholder Main Heading
                 </h1>
 
                 <p class="hero__description">
-                    Michaels Tech Repair provides practical computer help,
-                    modern website development, PC upgrades, and cloud
-                    solutions without unnecessary complexity.
+                    Placeholder introductory text goes here.
                 </p>
 
                 <div class="hero__actions">
 
-                    <a
-                        href="#services"
-                        class="button button--primary"
-                    >
-                        View Services
+                    <a href="#" class="button">
+                        Primary Button
                     </a>
 
-                    <a
-                        href="#contact"
-                        class="button button--secondary"
-                    >
-                        Contact Me
+                    <a href="#" class="button">
+                        Secondary Button
+                    </a>
+
+                </div>
+
+                <div class="hero__meta">
+                    Placeholder • Placeholder • Placeholder
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    {{-- =====================================================
+        SERVICES
+    ====================================================== --}}
+    <section class="section services">
+
+        <div class="page-container">
+
+            <header class="section-heading">
+
+                <span class="section-heading__eyebrow">
+                    Services
+                </span>
+
+                <h2 class="section-heading__title">
+                    How I Can Help
+                </h2>
+
+            </header>
+
+
+            <div class="service-grid">
+
+                @for ($i = 1; $i <= 6; $i++)
+
+                    <article class="service-card">
+
+                        <div class="placeholder placeholder--icon">
+                            Icon
+                        </div>
+
+                        <div class="service-card__content">
+
+                            <h3>
+                                Service {{ $i }}
+                            </h3>
+
+                            <p>
+                                Placeholder service description.
+                            </p>
+
+                            <a href="#">
+                                Learn More
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                @endfor
+
+            </div>
+
+
+            <aside class="problem-cta">
+
+                <div class="problem-cta__content">
+
+                    <h3>
+                        Placeholder CTA Heading
+                    </h3>
+
+                    <p>
+                        Placeholder CTA text.
+                    </p>
+
+                </div>
+
+                <div class="problem-cta__action">
+
+                    <a href="#" class="button">
+                        CTA Button
+                    </a>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </section>
+
+
+    {{-- =====================================================
+        BENEFITS
+    ====================================================== --}}
+    <section class="section benefits">
+
+        <div class="page-container">
+
+            <header class="section-heading">
+
+                <span class="section-heading__eyebrow">
+                    Placeholder
+                </span>
+
+                <h2 class="section-heading__title">
+                    Why Choose Michael's Tech Repair
+                </h2>
+
+            </header>
+
+
+            <div class="benefit-grid">
+
+                @for ($i = 1; $i <= 5; $i++)
+
+                    <article class="benefit">
+
+                        <div class="placeholder placeholder--icon">
+                            Icon
+                        </div>
+
+                        <h3>
+                            Benefit {{ $i }}
+                        </h3>
+
+                        <p>
+                            Placeholder description.
+                        </p>
+
+                    </article>
+
+                @endfor
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    {{-- =====================================================
+        ABOUT PREVIEW
+    ====================================================== --}}
+    <section class="section about-preview">
+
+        <div class="page-container">
+
+            <div class="about-preview__grid">
+
+                <div class="about-preview__media">
+
+                    <div class="placeholder placeholder--image">
+                        Image
+                    </div>
+
+                </div>
+
+
+                <div class="about-preview__content">
+
+                    <span class="section-heading__eyebrow">
+                        About
+                    </span>
+
+                    <h2>
+                        Placeholder About Heading
+                    </h2>
+
+                    <p>
+                        Placeholder About text.
+                    </p>
+
+                    <a href="#" class="button">
+                        About Button
                     </a>
 
                 </div>
 
             </div>
 
-        </section>
+        </div>
+
+    </section>
 
 
-        <section
-            id="services"
-            class="services"
-        >
+    {{-- =====================================================
+        CONTACT CTA
+    ====================================================== --}}
+    <section class="section contact-cta">
 
-            <div class="section-heading">
+        <div class="page-container">
 
-                <p class="section-heading__eyebrow">
-                    Services
-                </p>
+            <div class="contact-cta__content">
 
-                <h2>
-                    Practical solutions for home and business technology.
-                </h2>
-
-            </div>
-
-
-            <div class="service-grid">
-
-                <article class="service-card">
-
-                    <h3>
-                        Website Creation & Setup
-                    </h3>
-
-                    <p>
-                        Modern websites built with maintainable tools,
-                        responsive layouts, and reliable deployment.
-                    </p>
-
-                </article>
-
-
-                <article class="service-card">
-
-                    <h3>
-                        Cloud & DevOps
-                    </h3>
-
-                    <p>
-                        Docker, Linux servers, cloud hosting, deployment
-                        automation, and infrastructure setup.
-                    </p>
-
-                </article>
-
-
-                <article class="service-card">
-
-                    <h3>
-                        PC Builds & Upgrades
-                    </h3>
-
-                    <p>
-                        Hardware upgrades, custom PC builds, troubleshooting,
-                        and practical recommendations.
-                    </p>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <section class="react-section">
-
-            <div class="section-heading">
-
-                <p class="section-heading__eyebrow">
-                    Laravel + React
-                </p>
+                <span class="section-heading__eyebrow">
+                    Placeholder
+                </span>
 
                 <h2>
-                    Application test component
+                    Placeholder Contact Heading
                 </h2>
 
                 <p>
-                    This component verifies that React is mounting correctly
-                    inside the Laravel Blade application.
+                    Placeholder contact description.
                 </p>
+
+                <div class="contact-cta__actions">
+
+                    <a href="#" class="button">
+                        Contact Form
+                    </a>
+
+                    <a href="#" class="button">
+                        Email
+                    </a>
+
+                </div>
 
             </div>
 
+        </div>
 
-            <div id="react-demo"></div>
-
-        </section>
+    </section>
 
 
-        <section
-            id="contact"
-            class="contact"
-        >
+</main>
 
-            <div>
 
-                <p class="section-heading__eyebrow">
-                    Need help?
-                </p>
+{{-- =====================================================
+    FOOTER
+====================================================== --}}
+<footer class="site-footer">
 
-                <h2>
-                    Let's find a practical solution.
-                </h2>
+    <div class="page-container">
 
+        <div class="site-footer__grid">
+
+            <div class="site-footer__brand">
+                Logo / Business
             </div>
 
+            <nav class="site-footer__nav">
+                <a href="#">Home</a>
+                <a href="#">Services</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
 
-            <a
-                href="mailto:michaelhoward977@gmail.com"
-                class="button button--primary"
-            >
-                Get in Touch
-            </a>
+            <div class="site-footer__contact">
+                Contact placeholder
+            </div>
 
-        </section>
+        </div>
 
-    </main>
 
+        <div class="site-footer__bottom">
+            Copyright Placeholder
+        </div>
+
+    </div>
+
+</footer>
 
 @endsection

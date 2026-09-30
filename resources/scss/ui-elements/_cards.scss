@@ -1,0 +1,118 @@
+@use 'tokens' as t;
+
+
+// ==========================================
+// SHARED CARD SURFACE
+// ==========================================
+
+.service-card,
+.problem-cta,
+.benefit,
+.service-problem-card,
+.process-step,
+.service-pricing,
+.service-faq {
+    background:
+        t.$gradient-card;
+
+    border:
+        t.$border-soft;
+
+    border-radius:
+        t.$radius-medium;
+
+    box-shadow:
+        t.$shadow-card;
+}
+
+
+// ==========================================
+// INTERACTIVE CARDS
+// ==========================================
+
+.service-card,
+.service-problem-card {
+    transition:
+        transform t.$transition-normal,
+        border-color t.$transition-normal,
+        box-shadow t.$transition-normal;
+}
+
+.service-card:hover,
+.service-problem-card:hover {
+    transform:
+        translateY(-4px);
+
+    border-color:
+        rgba(59, 168, 255, 0.5);
+
+    box-shadow:
+        t.$shadow-card-hover,
+        t.$shadow-glow-blue;
+}
+
+
+// ==========================================
+// BENEFITS
+// ==========================================
+
+.benefit {
+    padding:
+        1.5rem;
+}
+
+
+// ==========================================
+// PROBLEM CTA
+// ==========================================
+
+.problem-cta {
+    box-shadow:
+        t.$shadow-card,
+        t.$shadow-glow-purple;
+}
+
+
+// ==========================================
+// FAQ
+// ==========================================
+
+.faq-item {
+    border-top:
+        t.$border-soft;
+
+    padding:
+        1rem 0;
+}
+
+.faq-item:first-child {
+    border-top:
+        0;
+}
+
+.faq-item summary {
+    cursor:
+        pointer;
+
+    color:
+        t.$text-primary;
+}
+
+
+// ==========================================
+// PLACEHOLDERS
+// ==========================================
+
+.placeholder {
+    border:
+        1px dashed rgba(184, 195, 217, 0.3);
+
+    border-radius:
+        t.$radius-small;
+
+    color:
+        t.$text-muted;
+
+    background:
+        rgba(255, 255, 255, 0.02);
+}

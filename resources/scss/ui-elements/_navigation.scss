@@ -1,0 +1,92 @@
+@use 'tokens' as t;
+
+
+// ==========================================
+// HEADER
+// ==========================================
+
+.site-header {
+    position:
+        relative;
+
+    z-index:
+        10;
+}
+
+
+// ==========================================
+// BRAND
+// ==========================================
+
+.site-header__brand {
+    color:
+        t.$text-primary;
+}
+
+.site-header__brand span {
+    font-weight:
+        600;
+}
+
+
+// ==========================================
+// NAV LINKS
+// ==========================================
+
+.site-header__nav a {
+    position:
+        relative;
+
+    color:
+        t.$text-secondary;
+
+    transition:
+        color t.$transition-fast;
+}
+
+.site-header__nav a:hover {
+    color:
+        t.$cyan;
+}
+
+
+// ==========================================
+// SIMPLE HOVER UNDERLINE
+// ==========================================
+
+.site-header__nav a::after {
+    content:
+        '';
+
+    position:
+        absolute;
+
+    left:
+        0;
+
+    right:
+        0;
+
+    bottom:
+        -0.4rem;
+
+    height:
+        1px;
+
+    background:
+        t.$gradient-accent;
+
+    transform:
+        scaleX(0);
+
+    transform-origin:
+        center;
+
+    transition:
+        transform t.$transition-fast;
+}
+
+.site-header__nav a:hover::after {
+    transform:
+        scaleX(1);
+}
