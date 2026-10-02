@@ -116,3 +116,25 @@
     background:
         rgba(255, 255, 255, 0.02);
 }
+
+// ==========================================
+// HOVER EFFECT
+// ==========================================
+
+.service-card__link {
+    color: #72d6b0;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.service-card:hover .service-card__link,
+.service-card:focus-visible .service-card__link {
+    color: #b4e4ce;
+}
+
+.service-card:focus-visible {
+    outline: 2px solid #72d6b0;
+    outline-offset: 4px;
+}
+
+

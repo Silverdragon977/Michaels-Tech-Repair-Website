@@ -1,0 +1,170 @@
+@use 'tokens' as t;
+
+
+// ==========================================
+// FOOTER APPEARANCE
+// ==========================================
+
+.site-footer {
+    background: #03050a;
+
+    border-top: t.$border-soft;
+
+    color: t.$text-secondary;
+}
+
+
+// ==========================================
+// BRAND
+// ==========================================
+
+.site-footer__brand-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    width: fit-content;
+}
+
+.site-footer__logo {
+    display: block;
+
+    width: min(100%, 360px);
+    height: auto;
+
+    object-fit: contain;
+}
+
+.site-footer__brand-name {
+    color: t.$text-primary;
+
+    font-size: 1.3rem;
+    font-weight: 700;
+
+    letter-spacing: -0.025em;
+}
+
+.site-footer__tagline {
+    max-width: 320px;
+
+    margin-top: 1rem;
+
+    color: t.$text-muted;
+    line-height: 1.6;
+}
+
+
+// ==========================================
+// FOOTER LINKS
+// ==========================================
+
+.site-footer__nav a {
+    color: t.$text-secondary;
+
+    transition: color t.$transition-fast;
+}
+
+.site-footer__nav a:hover,
+.site-footer__contact-link:hover {
+    color: t.$cyan;
+}
+
+
+// ==========================================
+// CONTACT
+// ==========================================
+
+.site-footer__contact h3 {
+    margin-bottom: 1rem;
+}
+
+.site-footer__contact p {
+    max-width: 300px;
+    line-height: 1.6;
+}
+
+.site-footer__contact-link {
+    color: t.$blue;
+    font-weight: 600;
+
+    transition: color t.$transition-fast;
+}
+
+
+// ==========================================
+// COPYRIGHT
+// ==========================================
+
+.site-footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1rem;
+
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+
+    border-top: t.$border-soft;
+
+    color: t.$text-muted;
+    font-size: 0.8rem;
+}
+
+// ==========================================
+// EXTRA STYLES
+// ==========================================
+.site-footer__heading {
+    margin: 0 0 1.25rem;
+
+    color: t.$text-primary;
+    font-size: 1rem;
+    font-weight: 650;
+}
+
+.site-footer__nav a {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.site-footer__contact h3 {
+    margin: 0 0 1.25rem;
+}
+
+.site-footer__contact p {
+    margin: 0 0 1rem;
+    max-width: 300px;
+}
+
+.site-footer__tagline {
+    max-width: 350px;
+    margin-top: 0.75rem;
+}
+
+.site-footer__bottom {
+    padding-top: 1.5rem;
+}
+// ==========================================
+// MOBILE
+// ==========================================
+
+@media (max-width: t.$mobile) {
+
+    .site-footer__logo {
+        width: 48px;
+        height: 48px;
+    }
+
+    .site-footer__brand-name {
+        font-size: 1.1rem;
+    }
+
+    .site-footer__bottom {
+        flex-direction: column;
+        align-items: flex-start;
+
+        margin-top: 2.5rem;
+    }
+
+}
+

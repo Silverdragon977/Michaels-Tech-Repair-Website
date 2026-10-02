@@ -10,9 +10,13 @@
         {{-- BRAND --}}
         <a href="{{ route('home') }}" class="site-header__brand">
 
-            <div class="placeholder placeholder--logo">
-                Logo
-            </div>
+        <img
+            src="{{ asset('images/branding/logo.webp') }}"
+            alt=""
+            class="site-header__logo"
+            width="40"
+            height="40"
+        >
             
             <span>Michael's Tech Repair</span>
         </a>

@@ -1,32 +1,88 @@
-{{-- =====================================================
+{{-- ==========================================
     FOOTER
-====================================================== --}}
+=========================================== --}}
+
 <footer class="site-footer">
 
     <div class="page-container">
 
         <div class="site-footer__grid">
 
+            {{-- BRAND --}}
             <div class="site-footer__brand">
-                Logo / Business
+
+                <a href="{{ route('home') }}" class="site-footer__brand-link">
+
+                    <img
+                        src="{{ asset('images/branding/logo-footer.webp') }}"
+                        alt="Michael's Tech Repair"
+                        class="site-footer__logo"
+                        loading="lazy"
+                    >
+
+                </a>
+
+                <p class="site-footer__tagline">
+                    Practical technology help for your home,
+                    computer, and online projects.
+                </p>
+
             </div>
 
-            <nav class="site-footer__nav">
-                <a href="#">Home</a>
-                <a href="#">Services</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
-            </nav>
 
+            {{-- NAVIGATION --}}
+            <div class="site-footer__links">
+            
+                <h3 class="site-footer__heading">
+                    Quick Links
+                </h3>
+            
+                <nav class="site-footer__nav" aria-label="Footer navigation">
+                
+                    <a href="{{ route('home') }}">Home</a>
+                    <a href="{{ route('home') }}#services">Services</a>
+                    <a href="{{ route('home') }}#about">About</a>
+                    <a href="{{ route('home') }}#contact">Contact</a>
+                
+                </nav>
+            
+            </div>
+
+
+            {{-- CONTACT --}}
             <div class="site-footer__contact">
-                Contact placeholder
+
+                <h3>Get in Touch</h3>
+
+                <p>
+                    Need help with something technical?
+                    Reach out to discuss your project or problem.
+                </p>
+
+                <a
+                    href="{{ route('home') }}#contact"
+                    class="site-footer__contact-link"
+                >
+                    Contact Me &rarr;
+                </a>
+
             </div>
 
         </div>
 
 
+        {{-- COPYRIGHT --}}
         <div class="site-footer__bottom">
-            Copyright Placeholder
+
+            <span>
+                &copy; {{ date('Y') }} Michael's Tech Repair.
+                All rights reserved.
+            </span>
+
+            <span class="site-footer__bottom-note">
+                Independently operated in Minnesota.
+            </span>
+
         </div>
 
     </div>
