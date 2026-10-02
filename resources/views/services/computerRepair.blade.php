@@ -1,3 +1,4 @@
+{{-- Computer Repair Service Blade --}}
 @include('serviceTemplate', [
 
     'title' => 'Computer Repair & Troubleshooting',

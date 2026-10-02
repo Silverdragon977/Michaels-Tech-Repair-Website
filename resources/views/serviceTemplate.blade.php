@@ -4,6 +4,8 @@
 
 @section('content')
 
+@include('layouts.navigation')
+
 <main class="service-page">
 
     {{-- ======================================
@@ -30,10 +32,10 @@
                 <div class="service-hero__actions">
 
                     <a
-                        href="/contact"
+                        href="{{ route('home') }}"
                         class="button button--primary"
                     >
-                        Request Help
+                        Other Services
                     </a>
 
                     <a
@@ -340,5 +342,8 @@
     </section>
 
 </main>
+
+
+@include('layouts.footer')
 
 @endsection

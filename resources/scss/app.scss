@@ -56,3 +56,16 @@ textarea,
 select {
     font: inherit;
 }
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+#services {
+    scroll-margin-top: 100px;
+}

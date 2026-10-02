@@ -5,6 +5,9 @@ Things I added:
     SCSS for compressing grid for mobile layout automatically
     Started a Style Guide
 
+    Created Basic Services template and blades made of the template
+    Took the Home blade and extracted the header, navigation, and footer into their own blades in layouts
+
 Things I fixed:
     The vite.config.ts needed update as the vite config didn't match the blade template
 

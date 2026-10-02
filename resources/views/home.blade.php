@@ -1,83 +1,16 @@
 @extends('layouts.app')
 
+@section('title', "Home | Michael's Tech Repair")
+
 @section('content')
 
 <main class="home">
-
-    {{-- =====================================================
-        HERO
-    ====================================================== --}}
-    <section class="hero">
-
-        <div class="page-container">
-
-            <header class="site-header">
-
-                <div class="site-header__brand">
-                    <div class="placeholder placeholder--logo">
-                        Logo
-                    </div>
-
-                    <span>Michael's Tech Repair</span>
-                </div>
-
-                <nav class="site-header__nav">
-                    <a href="#">Home</a>
-                    <a href="#">Services</a>
-                    <a href="#">About</a>
-                    <a href="#">Contact</a>
-                </nav>
-
-                <div class="site-header__action">
-                    <a href="#" class="button button--primary">
-                        Get Help
-                    </a>
-                </div>
-
-            </header>
-
-
-            <div class="hero__content">
-
-                <div class="hero__eyebrow">
-                    Placeholder eyebrow
-                </div>
-
-                <h1 class="hero__title">
-                    Placeholder Main Heading
-                </h1>
-
-                <p class="hero__description">
-                    Placeholder introductory text goes here.
-                </p>
-
-                <div class="hero__actions">
-
-                    <a href="#" class="button">
-                        Primary Button
-                    </a>
-
-                    <a href="#" class="button">
-                        Secondary Button
-                    </a>
-
-                </div>
-
-                <div class="hero__meta">
-                    Placeholder • Placeholder • Placeholder
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
+@include('layouts.navigation')
+@include('layouts.header')
     {{-- =====================================================
         SERVICES
     ====================================================== --}}
-    <section class="section services">
+    <section class="section services" id="services">
 
         <div class="page-container">
 
@@ -94,93 +27,84 @@
             </header>
 
 
+            @php
+
+                $services = [
+                    [
+                        'title' => 'Computer Repair',
+                        'description' => 'Diagnosis, repair, and maintenance for desktop and laptop computers.',
+                        'url' => route('services.computer-repair'),
+                    ],[
+                        'title' => 'Virus Removal',
+                        'description' => 'Removal of malware, unwanted software, and other security threats.',
+                        'url' => route('services.virus-removal'),
+                    ],[
+                        'title' => 'Home Tech Setup',
+                        'description' => 'Assistance setting up everyday technology around your home.',
+                        'url' => route('services.home-tech-setup'),
+                    ],[
+                        'title' => 'Troubleshooting Devices',
+                        'description' => 'Help resolving technical issues with computers and connected devices.',
+                        'url' => route('services.device-troubleshooting'),
+                    ],[
+                        'title' => 'Website Creation & Maintenance',
+                        'description' => 'Custom websites, hosting setup, updates, and ongoing maintenance.',
+                        'url' => route('services.website-creation'),
+                    ],[
+                        'title' => 'PC Builds & Upgrades',
+                        'description' => 'Custom computer builds, component selection, and hardware upgrades.',
+                        'url' => route('services.pc-builds'),
+                    ],[
+                        'title' => 'Media Server Setup',
+                        'description' => 'Personal media servers, streaming configuration, and home entertainment.',
+                        'url' => route('services.media-servers'),
+                    ],[
+                        'title' => 'Network Setup',
+                        'description' => 'Wi-Fi, routers, Ethernet, network configuration, and troubleshooting.',
+                        'url' => route('services.network-setup'),
+                    ],[
+                        'title' => 'Cloud & Server Administration',
+                        'description' => 'Linux servers, Docker, hosting, deployment, and cloud infrastructure.',
+                        'url' => route('services.cloud-server-administration'),
+                    ],
+                ];
+
+            @endphp
+
+
             <div class="service-grid">
+            
+                @foreach ($services as $service)
 
-                @for ($i = 1; $i <= 9; $i++)
-
-                    <article class="service-card">
-
-                        <div class="placeholder placeholder--icon">
-                            Icon
-                        </div>
-
-                        <div class="service-card__content">
-
-                            <h3>
-
-
-                                {{-- Later on make a key value pair and index with value instead of using multiple if-else statements. --}}
-                                <?php if ($i == 1 ) {
-                                    echo 'Computer Repair';
-                                } elseif ($i == 2) {
-                                    echo 'Virus Removal';
-                                } elseif ($i == 3) {
-                                    echo 'Home Tech Setup';
-                                } elseif ($i == 4) {
-                                    echo 'Troubleshooting Devices';
-                                } elseif ($i == 5) {
-                                    echo 'Website Creation & Maintenance';
-                                } elseif ($i == 6) {
-                                    echo 'PC Builds & Upgrades';
-                                } elseif ($i == 7) {
-                                    echo 'Media Server Setup';
-                                } elseif ($i == 8) {
-                                    echo 'Network Setup';
-                                } elseif ($i == 9) {
-                                    echo 'Cloud & Server Administration';
-                                }?>
-                            </h3>
-
-                            <p>
-                                <?php if ($i == 1 ) {
-                                    echo 'Description for Computer Repair';
-                                } elseif ($i == 2) {
-                                    echo 'Description for Virus Removal';
-                                } elseif ($i == 3) {
-                                    echo 'Description for Home Tech Setup';
-                                } elseif ($i == 4) {
-                                    echo 'Description for Troubleshooting Devices';
-                                } elseif ($i == 5) {
-                                    echo 'Description for Website Creation & Maintenance';
-                                } elseif ($i == 6) {
-                                    echo 'Description for PC Builds & Upgrades';
-                                } elseif ($i == 7) {
-                                    echo 'Description for Media Server Setup';
-                                } elseif ($i == 8) {
-                                    echo 'Description for Network Setup';
-                                } elseif ($i == 9) {
-                                    echo 'Description for Cloud & Server Administration';
-                                }?>
-                            </p>
-
-                            <a href="#">
-                                <?php if ($i == 1 ) {
-                                    echo '<a href="{{  }}">Learn more</a>';
-                                } elseif ($i == 2) {
-                                    echo '<a href="{{  }}">Learn more</a>';
-                                } elseif ($i == 3) {
-                                    echo '<a href="{{  }}">Learn more</a>';
-                                } elseif ($i == 4) {
-                                    echo '<a href="{{  }}">Learn more</a>';
-                                } elseif ($i == 5) {
-                                    echo '<a href="{{  }}">Learn more</a>';
-                                } elseif ($i == 6) {
-                                    echo '<a href="{{  }}">Learn more</a>';
-                                } elseif ($i == 7) {
-                                    echo '<a href="{{  }}">Learn more</a>';
-                                } elseif ($i == 8) {
-                                    echo '<a href="{{  }}">Learn more</a>';
-                                } elseif ($i == 9) {
-                                    echo '<a href="{{  }}">Learn more</a>';
-                                }?>
-                            </a>
-
-                        </div>
-
-                    </article>
-
-                @endfor
-
+                    <a href="{{ $service['url'] }}"> 
+                        <article class="service-card">
+                        
+                            <div class="placeholder placeholder--icon">
+                                Icon
+                            </div>
+                        
+                        
+                            <div class="service-card__content">
+                            
+                                <h3>
+                                    {{ $service['title'] }}
+                                </h3>
+                            
+                                <p>
+                                    {{ $service['description'] }}
+                                </p>
+                            
+                                <p>
+                                    Click to Learn More
+                                </p>
+                            
+                            </div>
+                        
+                        </article>
+                    </a>
+                    
+                @endforeach
+                
             </div>
 
 
@@ -348,41 +272,6 @@
 
 
 </main>
-
-
-{{-- =====================================================
-    FOOTER
-====================================================== --}}
-<footer class="site-footer">
-
-    <div class="page-container">
-
-        <div class="site-footer__grid">
-
-            <div class="site-footer__brand">
-                Logo / Business
-            </div>
-
-            <nav class="site-footer__nav">
-                <a href="#">Home</a>
-                <a href="#">Services</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
-            </nav>
-
-            <div class="site-footer__contact">
-                Contact placeholder
-            </div>
-
-        </div>
-
-
-        <div class="site-footer__bottom">
-            Copyright Placeholder
-        </div>
-
-    </div>
-
-</footer>
-
+@include('layouts.footer')
 @endsection
+
