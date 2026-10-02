@@ -1,0 +1,120 @@
+// ==========================================
+// COLORS
+// ==========================================
+
+$background-black: #05070d;
+$background-dark: #070b14;
+$background-navy: #08111f;
+$background-blue: #0e1830;
+$background-card: #111a2d;
+
+$text-primary: #f5f7fb;
+$text-secondary: #b8c3d9;
+$text-muted: #7a879c;
+
+$blue: #3ba8ff;
+$cyan: #22d3ee;
+$purple: #7c5cff;
+$magenta: #b04bff;
+$red: #e14b5a;
+
+
+// ==========================================
+// GRADIENTS
+// ==========================================
+
+$gradient-page:
+    linear-gradient(
+        180deg,
+        $background-black 0%,
+        $background-navy 45%,
+        $background-blue 70%,
+        $background-black 100%
+    );
+
+$gradient-accent:
+    linear-gradient(
+        135deg,
+        $blue 0%,
+        $purple 100%
+    );
+
+$gradient-accent-hover:
+    linear-gradient(
+        135deg,
+        $cyan 0%,
+        $magenta 100%
+    );
+
+$gradient-card:
+    linear-gradient(
+        145deg,
+        rgba(19, 35, 71, 0.72) 0%,
+        rgba(5, 7, 13, 0.9) 100%
+    );
+
+$gradient-section:
+    linear-gradient(
+        180deg,
+        rgba(8, 17, 31, 0.95) 0%,
+        rgba(5, 7, 13, 1) 100%
+    );
+
+
+// ==========================================
+// BORDERS
+// ==========================================
+
+$border-soft:
+    1px solid rgba(92, 140, 255, 0.18);
+
+$border-medium:
+    1px solid rgba(92, 140, 255, 0.32);
+
+$border-bright:
+    1px solid rgba(34, 211, 238, 0.55);
+
+
+// ==========================================
+// RADII
+// ==========================================
+
+$radius-small: 8px;
+$radius-medium: 14px;
+$radius-large: 22px;
+$radius-pill: 999px;
+
+
+// ==========================================
+// SHADOWS
+// ==========================================
+
+$shadow-card:
+    0 10px 40px rgba(0, 0, 0, 0.35);
+
+$shadow-card-hover:
+    0 18px 55px rgba(0, 0, 0, 0.45);
+
+$shadow-glow-blue:
+    0 0 30px rgba(59, 168, 255, 0.16);
+
+$shadow-glow-purple:
+    0 0 30px rgba(124, 92, 255, 0.16);
+
+
+// ==========================================
+// BREAKPOINTS
+// ==========================================
+
+$desktop: 1200px;
+$tablet: 900px;
+$mobile: 600px;
+
+
+// ==========================================
+// TRANSITIONS
+// ==========================================
+
+$transition-fast: 150ms ease;
+$transition-normal: 200ms ease;
+$transition-slow: 300ms ease;

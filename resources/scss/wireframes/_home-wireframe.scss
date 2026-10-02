@@ -1,0 +1,550 @@
+// ==========================================
+// resources/scss/wireframes/_home-wireframe.scss
+// ==========================================
+
+@use '../ui-elements/tokens' as t;
+
+
+// ==========================================
+// PAGE CONTAINER
+// ==========================================
+
+.page-container {
+    width:
+        min(100% - 3rem, 1400px);
+
+    margin-inline:
+        auto;
+}
+
+
+// ==========================================
+// GENERIC SECTIONS
+// ==========================================
+
+.section {
+    padding-block:
+        6rem;
+}
+
+.section-heading {
+    margin-bottom:
+        3rem;
+
+    text-align:
+        center;
+}
+
+.section-heading__eyebrow {
+    display:
+        block;
+
+    margin-bottom:
+        0.75rem;
+}
+
+.section-heading__title {
+    margin:
+        0;
+}
+
+
+// ==========================================
+// NAVIGATION STRUCTURE
+// ==========================================
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    display: block; // Important: overrides the old grid
+
+    width: 100%;
+}
+
+.site-header__inner {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto
+        minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 1.5rem;
+
+    width: min(100% - 3rem, 1400px);
+    margin-inline: auto;
+
+    padding-block: 0.5rem;
+}
+
+.site-header__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    min-width: 0;
+    
+}
+
+.site-header__nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    gap: 1.5rem;
+    white-space: nowrap;
+}
+
+.site-header__action {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+// ==========================================
+// TABLET
+// ==========================================
+
+@media (max-width: 900px) {
+
+    .site-header__inner {
+        grid-template-columns: 1fr auto;
+
+        width: min(100% - 2rem, 1400px);
+    }
+
+    .site-header__nav {
+        display: none;
+    }
+}
+
+
+// ==========================================
+// MOBILE
+// ==========================================
+
+@media (max-width: 600px) {
+
+    .site-header__inner {
+        gap: 1rem;
+        padding-block: 0.75rem;
+    }
+
+    .site-header__brand {
+        gap: 0.5rem;
+    }
+
+}
+
+
+// ==========================================
+// HERO
+// ==========================================
+
+.hero {
+    min-height:
+        700px;
+}
+
+.hero__content {
+    max-width:
+        850px;
+
+    margin-inline:
+        auto;
+
+    padding-top:
+        7.5rem;
+
+    text-align:
+        center;
+}
+
+.hero__title {
+    margin-block:
+        1rem;
+}
+
+.hero__description {
+    max-width:
+        700px;
+
+    margin-inline:
+        auto;
+}
+
+.hero__actions {
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    gap:
+        1rem;
+
+    margin-top:
+        14rem;
+}
+
+.hero__meta {
+    margin-top:
+        2rem;
+}
+
+
+// ==========================================
+// SERVICES
+// ==========================================
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.service-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    min-height: 260px;
+    padding: 1rem;
+
+    text-align: center;
+}
+
+.service-card__icon {
+    display: grid;
+    place-items: center;
+
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0;
+}
+
+.service-card__icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.service-card__title {
+    margin: 0.5rem 0 1rem;
+    font-size: 1.15rem;
+    line-height: 1.3;
+}
+
+.service-card__link {
+    margin-top: auto;
+}
+
+
+// ==========================================
+// PROBLEM CTA
+// ==========================================
+
+.problem-cta {
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr auto;
+
+    align-items:
+        center;
+
+    gap:
+        2rem;
+
+    margin-top:
+        2rem;
+
+    padding:
+        2rem;
+}
+
+
+// ==========================================
+// BENEFITS
+// ==========================================
+
+.benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.benefit {
+    text-align:
+        center;
+}
+
+
+// ==========================================
+// ABOUT
+// ==========================================
+
+.about-preview__grid {
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    align-items:
+        center;
+
+    gap:
+        4rem;
+}
+
+.about-preview__media {
+    min-height:
+        400px;
+}
+
+
+// ==========================================
+// CONTACT
+// ==========================================
+
+.contact-cta__content {
+    max-width:
+        800px;
+
+    margin-inline:
+        auto;
+
+    text-align:
+        center;
+}
+
+.contact-cta__actions {
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    gap:
+        1rem;
+
+    margin-top:
+        2rem;
+}
+
+
+// ==========================================
+// FOOTER WIREFRAME
+// ==========================================
+
+.site-footer {
+    padding-block: 3.5rem 1.5rem;
+}
+
+.site-footer__grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.4fr)
+        minmax(150px, 0.7fr)
+        minmax(0, 1fr);
+
+    align-items: start;
+
+    gap: clamp(2rem, 5vw, 5rem);
+}
+
+.site-footer__brand {
+    min-width: 0;
+}
+
+.site-footer__brand-link {
+    display: flex;
+    align-items: center;
+
+    gap: 1rem;
+}
+
+.site-footer__nav {
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+    gap: 0.8rem;
+}
+
+.site-footer__contact {
+    text-align: left;
+}
+
+.site-footer__bottom {
+    margin-top: 3.5rem;
+}
+
+// ==========================================
+// PLACEHOLDERS
+// ==========================================
+
+.placeholder {
+    display:
+        grid;
+
+    place-items:
+        center;
+}
+
+.placeholder--icon {
+    width:
+        60px;
+
+    height:
+        60px;
+}
+
+.placeholder--image {
+    width:
+        100%;
+
+    min-height:
+        400px;
+}
+
+
+// ==========================================
+// TABLET
+// ==========================================
+
+@media (max-width: t.$tablet) {
+
+    .site-header {
+        grid-template-columns:
+            1fr auto;
+    }
+
+    .site-header__nav {
+        display:
+            none;
+    }
+
+    .service-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .benefit-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .about-preview__grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .site-footer__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.5rem;
+    }
+
+    .site-footer__brand {
+        grid-column: 1 / -1;
+    }
+
+    .site-footer__contact {
+        text-align: left;
+    }
+}
+
+
+// ==========================================
+// MOBILE
+// ==========================================
+
+@media (max-width: t.$mobile) {
+
+    .page-container {
+        width:
+            min(100% - 2rem, 1400px);
+    }
+
+    .section {
+        padding-block:
+            4rem;
+    }
+
+    .hero {
+        min-height:
+            auto;
+
+        padding-bottom:
+            5rem;
+    }
+
+    .hero__content {
+        padding-top:
+            5rem;
+    }
+
+    .hero__actions {
+        flex-direction:
+            column;
+    }
+
+    .service-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-card {
+        grid-template-columns:
+            auto 1fr;
+    }
+
+    .problem-cta {
+        grid-template-columns:
+            1fr;
+    }
+
+    .problem-cta__action {
+        width:
+            100%;
+    }
+
+    .benefit-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .about-preview__grid {
+        gap:
+            2rem;
+    }
+
+    .contact-cta__actions {
+        flex-direction:
+            column;
+    }
+
+    .site-footer__grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .site-footer__brand {
+        grid-column: auto;
+    }
+
+    .site-footer__nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .site-footer__contact {
+        text-align: left;
+    }
+}

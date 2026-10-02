@@ -1,0 +1,101 @@
+@use 'tokens' as t;
+
+
+// ==========================================
+// BASE BUTTON
+// ==========================================
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding:
+        0.75rem
+        1.5rem;
+
+    border:
+        t.$border-medium;
+
+    border-radius:
+        t.$radius-small;
+
+    background:
+        rgba(8, 17, 31, 0.65);
+
+    color:
+        t.$text-primary;
+
+    cursor:
+        pointer;
+
+    transition:
+        transform t.$transition-fast,
+        border-color t.$transition-fast,
+        background t.$transition-fast,
+        box-shadow t.$transition-fast;
+}
+
+.button:hover {
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(34, 211, 238, 0.65);
+}
+
+
+// ==========================================
+// PRIMARY
+// ==========================================
+
+.button--primary {
+    border-color:
+        transparent;
+
+    background:
+        t.$gradient-accent;
+
+    color:
+        white;
+
+    box-shadow:
+        t.$shadow-glow-blue;
+}
+
+.button--primary:hover {
+    background:
+        t.$gradient-accent-hover;
+
+    box-shadow:
+        0 0 35px rgba(59, 168, 255, 0.25);
+}
+
+
+// ==========================================
+// SECONDARY
+// ==========================================
+
+.button--secondary {
+    background:
+        rgba(8, 17, 31, 0.68);
+
+    color:
+        t.$text-primary;
+}
+
+.button--secondary:hover {
+    border-color:
+        t.$cyan;
+}
+
+
+// ==========================================
+// FULL WIDTH UTILITY
+// ==========================================
+
+.button--full {
+    width: 100%;
+}

@@ -1,0 +1,143 @@
+// ==========================================
+// resources/scss/ui-elements/_navigation.scss
+// ==========================================
+
+@use 'tokens' as t;
+
+
+// ==========================================
+// STICKY NAVIGATION APPEARANCE
+// ==========================================
+
+.site-header {
+    background: rgba(5, 7, 13, 0.82);
+
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+
+    border-bottom: 1px solid rgba(92, 140, 255, 0.14);
+
+    box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.12);
+}
+
+
+// ==========================================
+// BRAND
+// ==========================================
+
+.site-header__brand {
+    color: t.$text-primary;
+
+    font-weight: 700;
+    letter-spacing: -0.02em;
+
+    white-space: nowrap;
+}
+
+// ==========================================
+// BRAND TEXT
+// ==========================================
+
+.site-header__brand span {
+    font-size: 1.35rem; // Approximately 22px
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+}
+
+.site-header__brand:hover {
+    color: t.$cyan;
+}
+
+
+// ==========================================
+// NAVIGATION LINKS
+// ==========================================
+
+.site-header__nav a {
+    position: relative;
+
+    color: t.$text-secondary;
+
+    font-size: 1.00rem;
+    font-weight: 500;
+
+    padding-block: 1.5rem;
+
+    transition: color t.$transition-fast;
+}
+
+.site-header__nav a:hover,
+.site-header__nav a:focus-visible {
+    color: t.$cyan;
+}
+
+
+// ==========================================
+// ANIMATED UNDERLINE
+// ==========================================
+
+.site-header__nav a::after {
+    content: '';
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 2px;
+
+    background: t.$gradient-accent;
+
+    transform: scaleX(0);
+    transform-origin: center;
+
+    transition: transform t.$transition-normal;
+}
+
+.site-header__nav a:hover::after,
+.site-header__nav a:focus-visible::after {
+    transform: scaleX(1);
+}
+
+// ==========================================
+// HELP BUTTON
+// ==========================================
+.site-header__action .button {
+    min-height: 36px;
+    padding: 0.45rem 1rem;
+    font-size: 0.875rem;
+}
+// ==========================================
+// NAVIGATION LOGO
+// ==========================================
+
+.site-header__logo {
+    display: block;
+
+    width: 40px;
+    height: 40px;
+
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+@media (max-width: t.$mobile) {
+    .site-header__logo {
+        width: 34px;
+        height: 34px;
+    }
+}
+// ==========================================
+// MOBILE BRAND
+// ==========================================
+
+@media (max-width: t.$mobile) {
+
+    .site-header__brand {
+        font-size: 0.85rem;
+    }
+
+}
