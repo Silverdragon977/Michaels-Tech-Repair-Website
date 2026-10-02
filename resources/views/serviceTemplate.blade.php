@@ -4,12 +4,10 @@
 
 @section('content')
 
-@include('layouts.navigation')
-
 <main class="service-page">
 
     {{-- ======================================
-        SERVICE HERO
+        SERVICE SECTION
     ======================================= --}}
     <section class="service-hero">
 

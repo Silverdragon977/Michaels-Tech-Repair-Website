@@ -11,7 +11,7 @@
     <title>
         @yield('title', "Michael's Tech Repair")
     </title>
-
+    @viteReactRefresh
     @vite([
         'resources/scss/app.scss',
         'resources/js/app.tsx'
@@ -19,6 +19,7 @@
 </head>
 
 <body>
+    @include('layouts.navigation')
     @yield('header')
     @yield('content')
     @yield('footer')

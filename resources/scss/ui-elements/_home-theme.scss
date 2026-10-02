@@ -1,12 +1,16 @@
+// ==========================================
+// resources/scss/ui-elements/_home-theme.scss
+// ==========================================
+
 @use 'tokens' as t;
 
 
 // ==========================================
-// PAGE
+// GLOBAL PAGE APPEARANCE
 // ==========================================
 
 html {
-    background: t.$background-black;
+    background-color: t.$background-black;
 }
 
 body {
@@ -20,13 +24,9 @@ body {
         sans-serif;
 }
 
-.home {
-    min-height: 100vh;
-}
-
 
 // ==========================================
-// TEXT
+// TYPOGRAPHY
 // ==========================================
 
 h1,
@@ -35,8 +35,6 @@ h3,
 h4,
 h5,
 h6 {
-    margin-top: 0;
-
     color: t.$text-primary;
 }
 
@@ -50,39 +48,85 @@ p {
     color: t.$cyan;
 
     text-transform: uppercase;
-
     letter-spacing: 0.12em;
 }
 
 
 // ==========================================
-// HERO
+// HERO BACKGROUND
 // ==========================================
 
 .hero {
-    background:
+    position: relative;
+    isolation: isolate;
+
+    background-color: t.$background-black;
+
+    background-image:
         linear-gradient(
             180deg,
-            rgba(5, 7, 13, 0.25) 0%,
-            rgba(5, 7, 13, 0.05) 50%,
-            rgba(5, 7, 13, 0.9) 100%
-        );
+            rgba(5, 7, 13, 0.15) 0%,
+            rgba(5, 7, 13, 0.03) 40%,
+            rgba(5, 7, 13, 0.15) 70%,
+            t.$background-black 100%
+        ),
+        var(--hero-image);
 
-    color: t.$text-primary;
-}
+    background-position:
+        center,
+        center 55%;
 
-.hero__description,
-.hero__meta {
-    color: t.$text-secondary;
+    background-size:
+        cover,
+        cover;
+
+    background-repeat:
+        no-repeat,
+        no-repeat;
 }
 
 
 // ==========================================
-// SERVICES
+// HERO CONTENT
+// ==========================================
+
+.hero .page-container {
+    position: relative;
+    z-index: 1;
+}
+
+.hero__title {
+    color: t.$text-primary;
+
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+.hero__description {
+    color: t.$text-secondary;
+
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.7;
+}
+
+.hero__meta {
+    color: t.$text-muted;
+}
+
+
+// ==========================================
+// HOME SERVICES
 // ==========================================
 
 .services {
-    background: t.$gradient-section;
+    background:
+        linear-gradient(
+            180deg,
+            t.$background-black 0%,
+            t.$background-navy 55%,
+            t.$background-black 100%
+        );
 }
 
 
@@ -129,6 +173,20 @@ p {
 
 .site-footer {
     background: #03050a;
-
     color: t.$text-secondary;
+}
+
+
+// ==========================================
+// MOBILE HERO BACKGROUND
+// ==========================================
+
+@media (max-width: t.$mobile) {
+
+    .hero {
+        background-position:
+            center,
+            52% center;
+    }
+
 }

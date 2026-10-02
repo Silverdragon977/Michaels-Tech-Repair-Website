@@ -10,5 +10,6 @@ Things I added:
 
 Things I fixed:
     The vite.config.ts needed update as the vite config didn't match the blade template
+    The _home-theme.scss was a dupe of _home-wireframe.scss so I removed it and added new scss for the theme
 
 Things I removed:

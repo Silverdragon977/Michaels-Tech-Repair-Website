@@ -1,4 +1,8 @@
 // ==========================================
+// resources/scss/app.scss
+// ==========================================
+
+// ==========================================
 // WIREFRAMES
 // ==========================================
 
@@ -34,6 +38,7 @@ body {
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 100px;
 }
 
 body {
@@ -66,6 +71,11 @@ html {
         scroll-behavior: auto;
     }
 }
-#services {
+#services,
+#contact, 
+#home, 
+#about {
     scroll-margin-top: 100px;
 }
+
+

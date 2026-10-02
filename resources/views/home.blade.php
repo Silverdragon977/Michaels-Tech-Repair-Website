@@ -5,7 +5,6 @@
 @section('content')
 
 <main class="home">
-@include('layouts.navigation')
 @include('layouts.header')
     {{-- =====================================================
         SERVICES

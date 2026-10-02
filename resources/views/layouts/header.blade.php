@@ -2,8 +2,7 @@
     {{-- =====================================================
         HERO
     ====================================================== --}}
-    <section class="hero">
-
+    <section class="hero" style="--hero-image: url('{{ asset('images/mountain-hero.webp') }}');">
         <div class="page-container">
 
             <div class="hero__content">
@@ -32,9 +31,9 @@
 
                 </div>
 
-                <div class="hero__meta">
+                {{-- <div class="hero__meta">
                     Placeholder • Placeholder • Placeholder
-                </div>
+                </div> --}}
 
             </div>
 
