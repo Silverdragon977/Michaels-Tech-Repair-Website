@@ -25,15 +25,15 @@
         <nav class="site-header__nav" aria-label="Main Navigation">
             <a href="{{ route('home') }}">Home</a>
             <a href="{{ route('home') }}#services">Services</a>
-            <a href="{{ route('home') }}#about">About</a>
-            <a href="{{ route('home') }}#contact">Contact</a>
+            <a href="{{ route('about') }}#about">About</a>
+            <a href="{{ route('contact') }}#contact">Contact</a>
         </nav>
 
 
         {{-- PRIMARY ACTION --}}
         <div class="site-header__action">
 
-            <a href="{{ route('home') }}#contact" class="button button--primary">
+            <a href="{{ route('contact') }}#contact" class="button button--primary">
                 Get Help
             </a>
 

@@ -8,15 +8,15 @@
             <div class="hero__content">
 
                 <div class="hero__eyebrow">
-                    Placeholder eyebrow
+                    LOCAL & REMOTE TECHNOLOGY SERVICES
                 </div>
 
                 <h1 class="hero__title">
-                    Placeholder Main Heading
+                    Technology Help Without the Headache
                 </h1>
 
                 <p class="hero__description">
-                    Placeholder introductory text goes here.
+                    We provide expert technology assistance for your home, computer, and online projects.
                 </p>
 
                 <div class="hero__actions">

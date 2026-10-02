@@ -2,14 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/_diagnostic', function () {
-    return response('Laravel routing works', 200)
-        ->header('Content-Type', 'text/plain');
-});
-
 Route::view('/', 'home')->name('home');
 
-Route::view('/services/computer-repair', 'services.computerRepair')->name('services.computerRepair');
+Route::view('/about', 'about')->name('about');
+
+Route::view('/contact', 'contact')->name('contact');
 
 // ==========================================
 // SERVICE ROUTES

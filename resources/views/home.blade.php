@@ -146,139 +146,117 @@
     </section>
 
 
-    {{-- =====================================================
-        BENEFITS
-    ====================================================== --}}
-    <section class="section benefits">
+{{-- ==========================================
+    BENEFITS
+=========================================== --}}
 
-        <div class="page-container">
+@php
+    $benefits = [
+        [
+            'title' => 'Clear Explanations',
+            'description' =>
+                'Understand what is happening with your technology and what your available options are.',
+            'icon' => 'messages-square',
+        ],
 
-            <header class="section-heading">
+        [
+            'title' => 'Transparent Pricing',
+            'description' =>
+                'Review the expected cost and scope of work before proceeding with a service.',
+            'icon' => 'wallet',
+        ],
 
-                <span class="section-heading__eyebrow">
-                    Placeholder
-                </span>
+        [
+            'title' => 'Flexible Service Options',
+            'description' =>
+                'Depending on the issue, arrange an on-site appointment, device drop-off, or remote assistance.',
+            'icon' => 'house',
+        ],
 
-                <h2 class="section-heading__title">
-                    Why Choose Michael's Tech Repair
-                </h2>
+        [
+            'title' => 'Personalized Support',
+            'description' =>
+                'Work directly with the person responsible for diagnosing and handling your technology problem.',
+            'icon' => 'user-round',
+        ],
 
-            </header>
-
-
-            <div class="benefit-grid">
-
-                @for ($i = 1; $i <= 5; $i++)
-
-                    <article class="benefit">
-
-                        <div class="placeholder placeholder--icon">
-                            Icon
-                        </div>
-
-                        <h3>
-                            Benefit {{ $i }}
-                        </h3>
-
-                        <p>
-                            Placeholder description.
-                        </p>
-
-                    </article>
-
-                @endfor
-
-            </div>
-
-        </div>
-
-    </section>
+        [
+            'title' => 'Everyday & Advanced IT',
+            'description' =>
+                'From setting up a printer to configuring servers, networks, and websites.',
+            'icon' => 'server-cog',
+        ],
+    ];
+@endphp
 
 
-    {{-- =====================================================
-        ABOUT PREVIEW
-    ====================================================== --}}
-    <section class="section about-preview">
+<section class="section benefits">
 
-        <div class="page-container">
+    <div class="page-container">
 
-            <div class="about-preview__grid">
+        <header class="section-heading">
 
-                <div class="about-preview__media">
+            <span class="section-heading__eyebrow">
+                Why Work With Me
+            </span>
 
-                    <div class="placeholder placeholder--image">
-                        Image
-                    </div>
+            <h2 class="section-heading__title">
+                Why Choose Michael's Tech Repair?
+            </h2>
 
-                </div>
+        </header>
 
 
-                <div class="about-preview__content">
+        <div class="benefit-grid">
 
-                    <span class="section-heading__eyebrow">
-                        About
-                    </span>
+            @foreach ($benefits as $benefit)
 
-                    <h2>
-                        Placeholder About Heading
-                    </h2>
+                <article class="benefit">
 
-                    <p>
-                        Placeholder About text.
+                    <h3 class="benefit__title">
+                        {{ $benefit['title'] }}
+                    </h3>
+
+                    <p class="benefit__description">
+                        {{ $benefit['description'] }}
                     </p>
 
-                    <a href="#" class="button">
-                        About Button
-                    </a>
+                </article>
 
-                </div>
-
-            </div>
+            @endforeach
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
     {{-- =====================================================
         CONTACT CTA
     ====================================================== --}}
-    <section class="section contact-cta">
-
-        <div class="page-container">
-
-            <div class="contact-cta__content">
-
-                <span class="section-heading__eyebrow">
-                    Placeholder
-                </span>
-
-                <h2>
-                    Placeholder Contact Heading
-                </h2>
-
-                <p>
-                    Placeholder contact description.
-                </p>
-
-                <div class="contact-cta__actions">
-
-                    <a href="#" class="button">
-                        Contact Form
-                    </a>
-
-                    <a href="#" class="button">
-                        Email
-                    </a>
-
-                </div>
-
-            </div>
-
+    <aside class="problem-cta">
+    
+        <div class="problem-cta__content">
+        
+            <h3>Not Sure What Service You Need?</h3>
+        
+            <p>
+                Describe what's happening or what you're trying to accomplish.
+                You don't need to diagnose the problem yourself.
+            </p>
+        
         </div>
-
-    </section>
-
+    
+        <div class="problem-cta__action">
+        
+            <a href="{{ route('contact') }}" class="button button--primary">
+                Get Help
+            </a>
+        
+        </div>
+    
+    </aside>
 
 </main>
 @include('layouts.footer')
