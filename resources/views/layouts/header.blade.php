@@ -16,24 +16,8 @@
                 </h1>
 
                 <p class="hero__description">
-                    We provide expert technology assistance for your home, computer, and online projects.
+                    We provide technology assistance for your home, computer, and online projects.
                 </p>
-
-                <div class="hero__actions">
-
-                    <a href="#" class="button">
-                        Primary Button
-                    </a>
-
-                    <a href="#" class="button">
-                        Secondary Button
-                    </a>
-
-                </div>
-
-                {{-- <div class="hero__meta">
-                    Placeholder • Placeholder • Placeholder
-                </div> --}}
 
             </div>
 

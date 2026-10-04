@@ -1,0 +1,48 @@
+name: CD
+
+on:
+  workflow_run:
+    workflows:
+      - CI
+    types:
+      - completed
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+
+  deploy:
+
+    name: Deploy Production
+
+    if: >-
+      ${{
+        github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.event == 'push' &&
+        github.event.workflow_run.head_branch == 'main' &&
+        github.event.workflow_run.head_repository.full_name == github.repository
+      }}
+
+    runs-on: ubuntu-latest
+
+    environment: production
+
+    timeout-minutes: 25
+
+    steps:
+
+      - name: Checkout tested commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Trigger existing deployment
+        env:
+          CD_HOST: ${{ secrets.CD_HOST }}
+          CD_USER: ${{ secrets.CD_USER }}
+          CD_SSH_KEY: ${{ secrets.CD_SSH_KEY }}
+          CD_KNOWN_HOSTS: ${{ secrets.CD_KNOWN_HOSTS }}
+        run: bash scripts/cd/trigger-deploy.sh

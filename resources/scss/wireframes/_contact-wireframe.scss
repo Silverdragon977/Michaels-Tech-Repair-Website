@@ -1,0 +1,291 @@
+// resources/scss/wireframes/_contact-wireframe.scss
+// ==========================================
+// CONTACT PAGE — WIREFRAME
+// Layout, spacing and responsiveness
+// ==========================================
+
+@use '../ui-elements/tokens' as t;
+
+
+// ==========================================
+// PAGE
+// ==========================================
+
+.contact-page {
+    min-height: 100vh;
+}
+
+
+// ==========================================
+// INTRODUCTION
+// ==========================================
+
+.contact-hero {
+    padding-block: 5rem 2.5rem;
+
+    .page-container {
+        max-width: 1200px;
+    }
+}
+
+.contact-hero__title {
+    max-width: 850px;
+    margin: 1rem 0 1.5rem;
+}
+
+.contact-hero__lead {
+    max-width: 750px;
+}
+
+
+// ==========================================
+// CONTACT SECTION
+// ==========================================
+
+.contact-methods {
+    padding-block: 1rem 5rem;
+
+    .page-container {
+        max-width: 1200px;
+    }
+}
+
+.contact-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.2fr)
+        minmax(0, 0.8fr);
+
+    align-items: start;
+    gap: 1.5rem;
+}
+
+
+// ==========================================
+// SHARED CARDS
+// ==========================================
+
+.contact-card {
+    min-width: 0;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+
+    > h2 {
+        margin-bottom: 1rem;
+    }
+
+    > p {
+        margin-bottom: 1.5rem;
+    }
+}
+
+.contact-card__heading {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    margin-bottom: 1.25rem;
+
+    h2 {
+        margin: 0;
+    }
+}
+
+.contact-card__icon {
+    display: grid;
+    place-items: center;
+
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+}
+
+
+// ==========================================
+// FORM LAYOUT
+// ==========================================
+
+.contact-form {
+    display: grid;
+    gap: 1.25rem;
+
+    margin-top: 2rem;
+}
+
+.contact-form__row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.contact-form__field {
+    display: grid;
+    gap: 0.5rem;
+    min-width: 0;
+}
+
+.contact-form__field input,
+.contact-form__field select,
+.contact-form__field textarea {
+    display: block;
+
+    width: 100%;
+    min-width: 0;
+    padding: 0.9rem 1rem;
+}
+
+.contact-form__field textarea {
+    min-height: 150px;
+}
+
+.contact-form > .button {
+    justify-self: start;
+}
+
+.contact-form__note {
+    max-width: 550px;
+    margin: 0;
+}
+
+
+// ==========================================
+// HONEYPOT
+// ==========================================
+
+// Hidden from ordinary visitors, but kept in the HTML
+// to catch simple automated form submissions.
+
+.contact-form__honeypot {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    overflow: hidden;
+    clip-path: inset(50%);
+
+    white-space: nowrap;
+}
+
+
+// ==========================================
+// DIRECT EMAIL
+// ==========================================
+
+.contact-email {
+    display: grid;
+    gap: 1.25rem;
+
+    margin-block: 1.5rem;
+    padding: 1.25rem;
+}
+
+.contact-email__address {
+    display: block;
+    overflow-wrap: anywhere;
+    user-select: text;
+}
+
+.contact-email .button {
+    justify-self: start;
+}
+
+.contact-email__status {
+    min-height: 1.5rem;
+    margin-top: 0.75rem;
+}
+
+.contact-card__details {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+
+    h3 {
+        margin-bottom: 1rem;
+    }
+
+    p {
+        margin-bottom: 1rem;
+    }
+
+    p:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// ==========================================
+// INTERNATIONAL PHONE INPUT
+// ==========================================
+
+.contact-form__field--phone {
+
+    .iti {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .iti input {
+        width: 100%;
+    }
+}
+
+// ==========================================
+// TABLET
+// ==========================================
+
+@media (max-width: t.$tablet) {
+
+    .contact-hero {
+        padding-block: 4rem 2.5rem;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-methods {
+        padding-bottom: 4rem;
+    }
+
+}
+
+
+// ==========================================
+// MOBILE
+// ==========================================
+
+@media (max-width: t.$mobile) {
+
+    .contact-hero {
+        padding-block: 3rem 2rem;
+    }
+
+    .contact-methods {
+        padding-block: 1rem 3rem;
+    }
+
+    .contact-grid {
+        gap: 1rem;
+    }
+
+    .contact-card {
+        padding: 1.5rem;
+    }
+
+    .contact-form__row {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-form > .button {
+        width: 100%;
+    }
+
+    .contact-email {
+        padding: 1rem;
+    }
+
+    .contact-email .button {
+        justify-self: stretch;
+        width: 100%;
+    }
+
+}

@@ -7,6 +7,10 @@
 #
 #   APP_DOMAIN=example.com
 #
+# Supports:
+#   https://example.com
+#   https://www.example.com -> https://example.com
+#
 # Caddy automatically handles HTTPS certificates when the
 # domain resolves to this server and ports 80/443 are open.
 # ============================================================
@@ -26,5 +30,11 @@
     # --------------------------------------------------------
 
     reverse_proxy app:80
+
+}
+# Redirect www to the primary domain
+www.{$APP_DOMAIN} {
+
+    redir https://{$APP_DOMAIN}{uri} permanent
 
 }

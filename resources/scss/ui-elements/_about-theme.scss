@@ -1,0 +1,147 @@
+// ==========================================
+// ABOUT PAGE — THEME
+// Visual styling only
+// resources/scss/ui-elements/_about-theme.scss
+// ==========================================
+
+@use 'tokens' as t;
+
+
+// ==========================================
+// PAGE BACKGROUND
+// ==========================================
+
+.about-page {
+    background: t.$gradient-page;
+    color: t.$text-primary;
+}
+
+
+// ==========================================
+// INTRODUCTION
+// ==========================================
+
+.about-hero {
+    background:
+        radial-gradient(
+            ellipse at 80% 0%,
+            rgba(59, 168, 255, 0.12),
+            transparent 60%
+        );
+}
+
+.about-hero .section-heading__eyebrow {
+    color: t.$mint;
+}
+
+.about-hero__title {
+    font-size: clamp(2.5rem, 5vw, 4.25rem);
+    font-weight: 750;
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+}
+
+.about-hero__lead {
+    color: t.$text-primary;
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    line-height: 1.7;
+}
+
+.about-hero p:not(.about-hero__lead) {
+    color: t.$text-secondary;
+    font-size: 1rem;
+    line-height: 1.85;
+}
+
+
+// ==========================================
+// BACKGROUND
+// ==========================================
+
+.about-background {
+    background: rgba(8, 17, 31, 0.45);
+    border-block: t.$border-soft;
+
+    p {
+        color: t.$text-secondary;
+        font-size: 1rem;
+        line-height: 1.85;
+    }
+}
+
+
+// ==========================================
+// APPROACH CARDS
+// ==========================================
+
+.about-principle {
+    background: t.$gradient-card;
+    border: t.$border-soft;
+    border-radius: t.$radius-medium;
+    box-shadow: t.$shadow-card;
+
+    transition:
+        transform t.$transition-normal,
+        border-color t.$transition-normal;
+
+    h3 {
+        color: t.$mint;
+        font-size: 1.15rem;
+        font-weight: 650;
+    }
+
+    p {
+        color: t.$text-secondary;
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    &:hover {
+        transform: translateY(-3px);
+        border-color: rgba(114, 214, 176, 0.35);
+    }
+}
+
+
+// ==========================================
+// CONTACT SECTION
+// ==========================================
+
+.about-contact {
+    border-top: t.$border-soft;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 100%,
+            rgba(114, 214, 176, 0.08),
+            transparent 65%
+        );
+
+    h2 {
+        color: t.$text-primary;
+        font-size: clamp(1.75rem, 3vw, 2.5rem);
+        letter-spacing: -0.025em;
+    }
+
+    p {
+        color: t.$text-secondary;
+        line-height: 1.75;
+    }
+}
+
+
+// ==========================================
+// ACCESSIBILITY
+// ==========================================
+
+@media (prefers-reduced-motion: reduce) {
+
+    .about-principle {
+        transition: none;
+
+        &:hover {
+            transform: none;
+        }
+    }
+
+}

@@ -8,6 +8,8 @@
 
 @use 'wireframes/home-wireframe';
 @use 'wireframes/service-wireframe';
+@use 'wireframes/about-wireframe';
+@use 'wireframes/contact-wireframe';
 
 
 // ==========================================
@@ -19,6 +21,8 @@
 @use 'ui-elements/cards';
 @use 'ui-elements/navigation';
 @use 'ui-elements/footer';
+@use 'ui-elements/about-theme';
+@use 'ui-elements/contact-theme';
 
 
 // ==========================================

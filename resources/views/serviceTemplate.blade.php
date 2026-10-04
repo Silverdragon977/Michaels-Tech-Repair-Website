@@ -1,3 +1,4 @@
+// resources/views/serviceTemplate.blade.php
 @extends('layouts.app')
 
 @section('title', ($title ?? 'Service') . " | Michael's Tech Repair")
@@ -30,7 +31,7 @@
                 <div class="service-hero__actions">
 
                     <a
-                        href="{{ route('home') }}"
+                        href="{{ route('home') }}#services"
                         class="button button--primary"
                     >
                         Other Services
@@ -325,7 +326,7 @@
                     </a>
 
                     <a
-                        href="/services"
+                        href="{{ route('home') }}#services"
                         class="button button--secondary"
                     >
                         View Other Services

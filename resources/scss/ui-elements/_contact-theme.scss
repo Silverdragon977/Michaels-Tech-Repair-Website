@@ -1,0 +1,278 @@
+// resources/scss/ui-elements/_contact-theme.scss
+// ==========================================
+// CONTACT PAGE — THEME
+// Color, typography, borders and effects
+// ==========================================
+
+@use 'tokens' as t;
+
+
+// ==========================================
+// PAGE
+// ==========================================
+
+.contact-page {
+    background: t.$gradient-page;
+    color: t.$text-primary;
+}
+
+
+// ==========================================
+// INTRODUCTION
+// ==========================================
+
+.contact-hero {
+    background:
+        radial-gradient(
+            ellipse at 80% 0%,
+            rgba(59, 168, 255, 0.12),
+            transparent 60%
+        );
+
+    .section-heading__eyebrow {
+        color: t.$mint;
+    }
+}
+
+.contact-hero__title {
+    color: t.$text-primary;
+
+    font-size: clamp(2.5rem, 5vw, 4.25rem);
+    font-weight: 750;
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+}
+
+.contact-hero__lead {
+    color: t.$text-secondary;
+
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    line-height: 1.75;
+}
+
+
+// ==========================================
+// SHARED CARDS
+// ==========================================
+
+.contact-card {
+    background: t.$gradient-card;
+
+    border: t.$border-soft;
+    border-radius: t.$radius-large;
+
+    box-shadow: t.$shadow-card;
+
+    > h2 {
+        color: t.$text-primary;
+        font-size: clamp(1.35rem, 2vw, 1.7rem);
+    }
+
+    > p {
+        color: t.$text-secondary;
+        line-height: 1.75;
+    }
+}
+
+.contact-card__heading h2 {
+    color: t.$text-primary;
+    font-size: clamp(1.3rem, 2vw, 1.6rem);
+}
+
+.contact-card__icon {
+    color: t.$mint;
+
+    background: rgba(114, 214, 176, 0.08);
+    border: 1px solid rgba(114, 214, 176, 0.2);
+
+    border-radius: t.$radius-medium;
+
+    font-size: 1.5rem;
+}
+
+
+// ==========================================
+// FORM FIELDS
+// ==========================================
+
+.contact-form__field label {
+    color: t.$text-primary;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.contact-form__field input,
+.contact-form__field select,
+.contact-form__field textarea {
+    color: t.$text-primary;
+
+    background: t.$background-dark;
+
+    border: t.$border-soft;
+    border-radius: t.$radius-small;
+
+    transition:
+        border-color t.$transition-fast,
+        box-shadow t.$transition-fast;
+
+    &::placeholder {
+        color: t.$text-muted;
+    }
+
+    &:hover {
+        border-color: rgba(114, 214, 176, 0.35);
+    }
+
+    &:focus-visible {
+        outline: 2px solid t.$mint;
+        outline-offset: 2px;
+    }
+
+    &[aria-invalid='true'] {
+        border-color: t.$red;
+    }
+}
+
+.contact-form__field select {
+    cursor: pointer;
+}
+
+.contact-form__field option {
+    background: t.$background-dark;
+    color: t.$text-primary;
+}
+
+.contact-form__field textarea {
+    resize: vertical;
+}
+
+
+// ==========================================
+// FORM FEEDBACK
+// ==========================================
+
+.contact-form__error {
+    color: #ff929a;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.contact-form__note {
+    color: t.$text-muted;
+    font-size: 0.82rem;
+    line-height: 1.6;
+}
+
+.contact-alert {
+    padding: 1rem;
+
+    border-radius: t.$radius-small;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.contact-alert--success {
+    color: t.$mint;
+
+    background: rgba(114, 214, 176, 0.08);
+    border: 1px solid rgba(114, 214, 176, 0.3);
+}
+
+.contact-alert--error {
+    color: #ff929a;
+
+    background: rgba(225, 75, 90, 0.08);
+    border: 1px solid rgba(225, 75, 90, 0.3);
+}
+
+
+// ==========================================
+// DIRECT EMAIL
+// ==========================================
+
+.contact-email {
+    background: t.$background-dark;
+
+    border: t.$border-soft;
+    border-radius: t.$radius-medium;
+}
+
+.contact-email__address {
+    color: t.$text-primary;
+
+    font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+    font-weight: 600;
+}
+
+.contact-email__status {
+    color: t.$mint;
+    font-size: 0.875rem;
+}
+
+// ==========================================
+// INTERNATIONAL PHONE INPUT — THEME
+// ==========================================
+
+.contact-form__field--phone {
+
+    .iti {
+        --iti-border-color: rgba(92, 140, 255, 0.32);
+        --iti-dropdown-bg: #111a2d;
+        --iti-hover-color: rgba(114, 214, 176, 0.12);
+        --iti-dialcode-color: #b8c3d9;
+    }
+
+    .iti__selected-country {
+        border-radius: t.$radius-small 0 0 t.$radius-small;
+    }
+
+    .iti__country-container {
+        color: t.$text-primary;
+    }
+
+    .iti__selected-dial-code {
+        color: t.$text-secondary;
+    }
+
+}
+
+.contact-form__hint {
+    color: t.$text-muted;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+// ==========================================
+// ADDITIONAL INFORMATION
+// ==========================================
+
+.contact-card__details {
+    border-top: t.$border-soft;
+
+    h3 {
+        color: t.$mint;
+        font-size: 1.1rem;
+    }
+
+    p {
+        color: t.$text-secondary;
+        font-size: 0.95rem;
+        line-height: 1.75;
+    }
+}
+
+
+// ==========================================
+// ACCESSIBILITY
+// ==========================================
+
+@media (prefers-reduced-motion: reduce) {
+
+    .contact-form__field input,
+    .contact-form__field select,
+    .contact-form__field textarea {
+        transition: none;
+    }
+
+}
