@@ -1,3 +1,4 @@
+// resources/views/serviceTemplate.blade.php
 @extends('layouts.app')
 
 @section('title', ($title ?? 'Service') . " | Michael's Tech Repair")

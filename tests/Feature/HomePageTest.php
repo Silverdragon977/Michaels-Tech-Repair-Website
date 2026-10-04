@@ -1,7 +1,5 @@
-{{-- tests/Feature/HomePageTest.php --}}
-
 <?php
-
+// {{-- tests/Feature/HomePageTest.php --}}
 beforeEach(function () {
     $this->withoutVite();
 });

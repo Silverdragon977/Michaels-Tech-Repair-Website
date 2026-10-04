@@ -1,6 +1,8 @@
 <?php
+// routes/web.php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
 
 Route::view('/', 'home')->name('home');
 
@@ -66,3 +68,11 @@ Route::view(
 )->name('services.cloud-server-administration');
 
 // END SERVICE ROUTES
+// ==========================================
+// CONTACT ME ROUTES
+
+Route::post('/contact', [ContactController::class, 'store'])
+    ->middleware('throttle:5,10')
+    ->name('contact.store');
+
+// END OF CONTACT ME ROUTES

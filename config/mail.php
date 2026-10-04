@@ -111,8 +111,21 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'contact@michaelstechrepair.com'),
         'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Laravel')),
     ],
-
+    /*
+    |--------------------------------------------------------------------------
+    | Website Contact Form Recipient
+    |--------------------------------------------------------------------------
+    |
+    | The business address that receives messages submitted through
+    | the website's contact form.
+    |
+    */
+    
+    'contact_recipient' => env(
+        'CONTACT_RECIPIENT',
+        'contact@michaelstechrepair.com'
+    ),
 ];
