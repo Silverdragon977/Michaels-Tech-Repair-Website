@@ -23,6 +23,7 @@
         "@laravel/multiplex": "^0.4.1"
     },
     "dependencies": {
+        "intl-tel-input": "^29.5.3",
         "react": "^19.3.0",
         "react-dom": "^19.3.0"
     }

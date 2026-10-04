@@ -210,6 +210,38 @@
     font-size: 0.875rem;
 }
 
+// ==========================================
+// INTERNATIONAL PHONE INPUT — THEME
+// ==========================================
+
+.contact-form__field--phone {
+
+    .iti {
+        --iti-border-color: rgba(92, 140, 255, 0.32);
+        --iti-dropdown-bg: #111a2d;
+        --iti-hover-color: rgba(114, 214, 176, 0.12);
+        --iti-dialcode-color: #b8c3d9;
+    }
+
+    .iti__selected-country {
+        border-radius: t.$radius-small 0 0 t.$radius-small;
+    }
+
+    .iti__country-container {
+        color: t.$text-primary;
+    }
+
+    .iti__selected-dial-code {
+        color: t.$text-secondary;
+    }
+
+}
+
+.contact-form__hint {
+    color: t.$text-muted;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
 
 // ==========================================
 // ADDITIONAL INFORMATION

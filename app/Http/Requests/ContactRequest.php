@@ -16,7 +16,8 @@ class ContactRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'min:2', 'max:100'],
             'email' => ['required', 'email', 'max:254'],
-            'phone' => ['nullable', 'string', 'max:30'],
+            'phone' => ['nullable', 'string', 'regex:/^\+[1-9]\d{1,14}$/'],
+            'phone_country' => ['nullable', 'string', 'size:2', 'alpha',],
             'service' => [
                 'required',
                 'in:computer-repair,virus-removal,home-tech-setup,device-troubleshooting,website-creation,pc-builds,media-servers,network-setup,cloud-server,other',

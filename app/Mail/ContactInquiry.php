@@ -34,6 +34,7 @@ class ContactInquiry extends Mailable
     {
         return new Content(
             view: 'emails.contact-inquiry',
+            text: 'emails.contact-inquiry-text',
         );
     }
 }

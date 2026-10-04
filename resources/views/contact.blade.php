@@ -87,6 +87,7 @@
                                     autocomplete="name"
                                     maxlength="100"
                                     required
+                                    placeholder="John Doe"
                                     aria-invalid="{{ $errors->has('name') ? 'true' : 'false' }}"
                                 >
                                 @error('name')
@@ -104,6 +105,7 @@
                                     autocomplete="email"
                                     maxlength="254"
                                     required
+                                    placeholder="you@example.com"
                                     aria-invalid="{{ $errors->has('email') ? 'true' : 'false' }}"
                                 >
                                 @error('email')
@@ -113,16 +115,36 @@
 
                         </div>
 
-                        <div class="contact-form__field">
-                            <label for="phone">Phone (optional)</label>
+                        <div class="contact-form__field contact-form__field--phone">
+
+                            <label for="phone-display">
+                                Phone (optional)
+                            </label>
+
                             <input
-                                id="phone"
-                                type="tel"
-                                name="phone"
-                                value="{{ old('phone') }}"
-                                autocomplete="tel"
-                                maxlength="30"
+                            id="phone-display"
+                            name="phone_display"
+                            type="tel"
+                            value="{{ old('phone') }}"
+                            autocomplete="tel"
+                            inputmode="tel"
+                            aria-describedby="phone-help phone-error"
                             >
+                            
+                            <span id="phone-help" class="contact-form__hint">
+                                Select your country, then enter your phone number.
+                            </span>
+                        
+                            <span
+                                id="phone-error"
+                                class="contact-form__error"
+                                role="alert"
+                            >
+                                @error('phone')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+
                         </div>
 
                         <div class="contact-form__field">
