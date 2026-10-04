@@ -32,25 +32,25 @@ Route::view(
 
 Route::view(
     '/services/device-troubleshooting',
-    'services.deviceTroubleshooting'
+    'services.troubleshootingDevices'
 )->name('services.device-troubleshooting');
 
 
 Route::view(
     '/services/website-creation',
-    'services.websiteCreation'
+    'services.websiteCreationAndMaintenance'
 )->name('services.website-creation');
 
 
 Route::view(
     '/services/pc-builds',
-    'services.pcBuilds'
+    'services.pcBuildsAndUpgrades'
 )->name('services.pc-builds');
 
 
 Route::view(
     '/services/media-servers',
-    'services.mediaServers'
+    'services.mediaServerSetup'
 )->name('services.media-servers');
 
 
@@ -62,7 +62,7 @@ Route::view(
 
 Route::view(
     '/services/cloud-server-administration',
-    'services.cloudServerAdministration'
+    'services.cloudAndServerAdministration'
 )->name('services.cloud-server-administration');
 
 // END SERVICE ROUTES

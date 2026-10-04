@@ -1,3 +1,4 @@
+{{-- resources/views/home.blade.php --}}
 @extends('layouts.app')
 
 @section('title', "Home | Michael's Tech Repair")
@@ -116,30 +117,6 @@
                 
             </div>
 
-
-            <aside class="problem-cta">
-
-                <div class="problem-cta__content">
-
-                    <h3>
-                        Placeholder CTA Heading
-                    </h3>
-
-                    <p>
-                        Placeholder CTA text.
-                    </p>
-
-                </div>
-
-                <div class="problem-cta__action">
-
-                    <a href="#" class="button">
-                        CTA Button
-                    </a>
-
-                </div>
-
-            </aside>
 
         </div>
 
