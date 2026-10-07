@@ -60,7 +60,7 @@
                 </p>
 
                 <a
-                    href="{{ route('home') }}#contact"
+                    href="{{ route('contact') }}#contact"
                     class="site-footer__contact-link"
                 >
                     Contact Me &rarr;
