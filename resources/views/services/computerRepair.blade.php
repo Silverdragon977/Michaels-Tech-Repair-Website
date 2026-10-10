@@ -6,10 +6,7 @@
     'eyebrow' => 'Computer Repair',
 
     'description' =>
-        'Help with slow computers, crashes, hardware failures, software problems, upgrades, and general troubleshooting.',
-
-    'meta' =>
-        'Desktop • Laptop • Hardware • Software',
+        'Are you having trouble with your computer or laptop? Here at Michael\'s Tech Repair, I can help identify your hardware problems and replace the broken or faulty parts, including screens, batteries, keyboards, and cooling fans. That way we can get your device back to optimal performance. Below are some of the common problems in this service. Please contact me for next steps.',
 
     'problems' => [
 
@@ -18,49 +15,57 @@
             'description' =>
                 'Troubleshooting startup delays, sluggish performance, and slow everyday use.',
         ],
-
+        [
+            'title' => 'Power & Charging',
+            'description' =>
+                'Computers that won\'t start, faulty batteries, charging issues, and power failures',
+        ],
+        [
+            'title' => 'Keyboard & Touchpad',
+            'description' =>
+                'Help with unresponsive or malfunctioning keyboards and touchpads, including driver and hardware issues.',
+        ],
+        [
+            'title' => 'Storage & Boot Issues',
+            'description' =>
+                'Help with slow storage, boot errors, and inaccessible drives.',
+        ],
+        [
+            'title' => 'Screen Problems',
+            'description' =>
+                'Cracked screens, flickering displays, dead pixels, and blank screens.',
+        ],
+        [
+            'title' => 'Overheating, Fans & Cooling',
+            'description' =>
+                'Addressing overheating issues, loud fans, reseating CPU Coolers, and improving overall cooling performance.',
+        ],
         [
             'title' => 'Crashes & Freezing',
             'description' =>
                 'Diagnosing freezes, blue screens, application crashes, and unstable systems.',
         ],
-
+        [
+            'title' => 'Replacing Components',
+            'description' =>
+                'Replacing faulty or outdated hardware components in laptops and desktops.',
+        ],
         [
             'title' => 'Hardware Problems',
             'description' =>
                 'Identifying failing components and practical repair or replacement options.',
         ],
 
-        [
-            'title' => 'Software Problems',
-            'description' =>
-                'Help with broken applications, driver issues, installation problems, and configuration.',
-        ],
-
-        [
-            'title' => 'Malware & Viruses',
-            'description' =>
-                'Removing unwanted software and helping secure the computer afterward.',
-        ],
-
-        [
-            'title' => 'Upgrades',
-            'description' =>
-                'Storage, RAM, batteries, and other practical computer upgrades.',
-        ],
 
     ],
 
     'included' => [
 
         'Hardware troubleshooting',
-        'Software troubleshooting',
+        'Operating system troubleshooting',
         'Driver installation',
-        'Malware cleanup',
         'Operating system setup',
-        'Storage upgrades',
-        'Memory upgrades',
-        'Laptop battery replacement',
+        'Speed optimization',
 
     ],
 

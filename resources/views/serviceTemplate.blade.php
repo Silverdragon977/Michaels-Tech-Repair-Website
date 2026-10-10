@@ -1,4 +1,4 @@
-// resources/views/serviceTemplate.blade.php
+{{-- // resources/views/serviceTemplate.blade.php --}}
 @extends('layouts.app')
 
 @section('title', ($title ?? 'Service') . " | Michael's Tech Repair")
@@ -45,14 +45,6 @@
                     </a>
 
                 </div>
-
-                @if (!empty($meta))
-
-                    <div class="service-hero__meta">
-                        {{ $meta }}
-                    </div>
-
-                @endif
 
             </div>
 
@@ -104,60 +96,6 @@
                         </article>
 
                     @endforeach
-
-                </div>
-
-            </div>
-
-        </section>
-
-    @endif
-
-
-    {{-- ======================================
-        SERVICE DETAILS
-    ======================================= --}}
-    @if (!empty($included))
-
-        <section class="section service-details">
-
-            <div class="page-container">
-
-                <div class="service-details__grid">
-
-                    <div class="service-details__content">
-
-                        <span class="section-heading__eyebrow">
-                            Service Details
-                        </span>
-
-                        <h2>
-                            What's Included
-                        </h2>
-
-
-                        <ul class="service-checklist">
-
-                            @foreach ($included as $item)
-
-                                <li>
-                                    {{ $item }}
-                                </li>
-
-                            @endforeach
-
-                        </ul>
-
-                    </div>
-
-
-                    <div class="service-details__media">
-
-                        <div class="placeholder placeholder--image">
-                            {{ $imageLabel ?? 'Service Image' }}
-                        </div>
-
-                    </div>
 
                 </div>
 

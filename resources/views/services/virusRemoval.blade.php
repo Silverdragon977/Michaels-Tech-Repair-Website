@@ -5,10 +5,7 @@
     'eyebrow' => 'Computer Security',
 
     'description' =>
-        'Help identifying and removing viruses, malware, unwanted software, browser hijackers, and other common computer security problems.',
-
-    'meta' =>
-        'Malware • Viruses • Browser Security • System Cleanup',
+        'Protect your computer from viruses, malware, scams, and unwanted software. We help identify and remove harmful  programs, resolve suspicious browser behavior, and check your computer\'s security to help prevent future infections.',
 
     'problems' => [
 
@@ -19,9 +16,9 @@
         ],
 
         [
-            'title' => 'Browser Hijacking',
+            'title' => 'Browser Problems & Hijacking',
             'description' =>
-                'Unwanted redirects, changed search engines, unfamiliar extensions, and suspicious notifications.',
+                ' Unwanted redirects, changed search engines, unfamiliar extensions, and suspicious notifications.',
         ],
 
         [
@@ -47,19 +44,16 @@
             'description' =>
                 'Reviewing common security settings and helping reduce future exposure to threats.',
         ],
-
-    ],
-
-    'included' => [
-
-        'Initial security assessment',
-        'Malware scanning',
-        'Virus and unwanted software removal',
-        'Browser extension review',
-        'Startup application inspection',
-        'Security software configuration',
-        'Operating system security updates',
-        'Recommendations for safer everyday use',
+        [
+            'title' => 'Help securing your computer',
+            'description' =>
+                'Assistance with configuring security settings, enableing 2FA,',
+        ],
+        [
+            'title' => 'Security Checks & Protection',
+            'description' =>
+                'Reviewing antivirus protection, firewall settings, and security updates to help keep your computer protected.',
+        ]
 
     ],
 
@@ -76,7 +70,7 @@
         [
             'title' => 'Security Assessment',
             'description' =>
-                'I inspect the computer for suspicious applications, settings, and potential infections.',
+                'I will scan and inspect the computer for suspicious applications, settings, and potential infections.',
         ],
 
         [
@@ -93,45 +87,36 @@
 
     ],
 
-    'pricing' => [
-
-        [
-            'name' => 'Security Assessment',
-            'price' => 'TBD',
-        ],
-
-        [
-            'name' => 'Malware Removal',
-            'price' => 'TBD',
-        ],
-
-        [
-            'name' => 'Extended Cleanup',
-            'price' => 'TBD',
-        ],
-
-    ],
 
     'faq' => [
-
+        [
+            'question' => 'How do I know if my computer has a virus?',
+            'answer' => 'Common signs include unexpected pop-ups, unfamiliar programs, browser redirects, and unusual computer behavior. However, these symptoms do not always indicate an infection, so further investigation may be needed.',
+        ],
         [
             'question' => 'Does a pop-up saying I have a virus mean my computer is infected?',
-            'answer' =>
-                'Not necessarily. Some warnings are fraudulent browser advertisements. I can help determine what is happening.',
+            'answer' => 'Not necessarily. Some websites display fake security warnings designed to trick you into downloading software, calling fraudulent support numbers, or making payments. We can help determine whether the warning is legitimate.',
         ],
-
         [
             'question' => 'Will removing malware delete my personal files?',
-            'answer' =>
-                'I aim to preserve personal data, but some infections may require more extensive recovery or a system reinstall. I will discuss the risks before proceeding.',
+            'answer' => 'Most common infections can be removed without affecting your personal files. However, severe infections may require deleting infected files or reinstalling the operating system. We will discuss potential data loss and backup options before proceeding.',
         ],
-
         [
             'question' => 'Can you guarantee every infection will be removed?',
-            'answer' =>
-                'No cleanup can guarantee that every threat has been eliminated. For serious compromises, a clean reinstall may be recommended.',
+            'answer' => 'No malware removal process can guarantee that every threat has been eliminated. While many infections can be successfully removed, serious or persistent infections may require a clean operating system installation.',
         ],
-
+        [
+            'question' => 'Can you help prevent future infections?',
+            'answer' => 'Yes. We can review your antivirus protection, firewall settings, browser security, and system updates. We can also provide guidance on recognizing suspicious downloads, websites, and online scams.',
+        ],
+        [
+            'question' => 'Can virus removal be performed remotely?',
+            'answer' => 'Many common malware infections, browser problems, and unwanted programs can be addressed remotely. More serious infections or computers that cannot operate normally may require an in-person examination.',
+        ],
+        [
+            'question' => 'What if I clicked a suspicious link or gave a scammer access to my computer?',
+            'answer' => 'We can help check for unwanted software, investigate suspicious activity, and remove unauthorized remote-access programs. We can also guide you through securing affected accounts and changing compromised passwords.',
+        ],
     ],
 
     'ctaTitle' => 'Concerned About a Computer Infection?',

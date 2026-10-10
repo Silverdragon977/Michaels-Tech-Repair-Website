@@ -5,7 +5,7 @@
     'eyebrow' => 'Home Technology',
 
     'description' =>
-        'Help installing, connecting, and configuring everyday household technology, from televisions and printers to computers and smart devices.',
+        'Setting up new technology or having trouble connecting your devices? We help install, connect, and configure everyday household electronics, including TVs, printers, smart home devices, and computer accessories.',
 
     'meta' =>
         'TVs • Printers • Smart Devices • Home Electronics',
@@ -19,9 +19,9 @@
         ],
 
         [
-            'title' => 'TV & Streaming Setup',
+            'title' => 'TV & Audio Setup',
             'description' =>
-                'Connecting televisions, streaming devices, applications, and related equipment.',
+                'Connecting televisions, speaker systems, audio receivers, and related equipment.',
         ],
 
         [
@@ -33,7 +33,7 @@
         [
             'title' => 'Smart Home Devices',
             'description' =>
-                'Help connecting supported smart plugs, cameras, speakers, and other connected devices.',
+                'Help connecting supported smart plugs, cameras, speakers, thermostats, and other connected devices.',
         ],
 
         [
@@ -47,19 +47,11 @@
             'description' =>
                 'Troubleshooting common HDMI, Bluetooth, USB, and wireless connection issues.',
         ],
-
-    ],
-
-    'included' => [
-
-        'New device installation and configuration',
-        'TV and streaming device setup',
-        'Printer and scanner setup',
-        'Computer accessory installation',
-        'Supported smart home device setup',
-        'Bluetooth and wireless pairing',
-        'Cable and connection troubleshooting',
-        'Basic instruction on using installed equipment',
+        [
+            'title' => 'TV Antennas & Reception',
+            'description' =>
+                'Assistance with TV antennas, signal reception, scanning channels, and related issues.',
+        ]
 
     ],
 
@@ -80,7 +72,7 @@
         ],
 
         [
-            'title' => 'Installation',
+            'title' => 'Setup & Configuration',
             'description' =>
                 'I connect and configure the devices according to the agreed setup.',
         ],
@@ -93,43 +85,42 @@
 
     ],
 
-    'pricing' => [
-
-        [
-            'name' => 'Single Device Setup',
-            'price' => 'TBD',
-        ],
-
-        [
-            'name' => 'Multiple Device Setup',
-            'price' => 'TBD',
-        ],
-
-        [
-            'name' => 'On-Site Assistance',
-            'price' => 'TBD',
-        ],
-
-    ],
-
     'faq' => [
 
         [
-            'question' => 'Can you come to my home?',
+            'question' => 'Will this service be available on-site in my home?',
             'answer' =>
-                'On-site appointments may be available depending on location, scheduling, and the type of work required.',
+                'Local on-site appointments may be available depending on location, scheduling, and transportation availability. Some services can also be completed remotely or by bringing the equipment to me.',
         ],
-
         [
-            'question' => 'Can you help if I do not understand the equipment?',
+            'question' => 'Can you help if I do not understand my equipment?',
             'answer' =>
-                'Absolutely. You can describe what you want to accomplish without needing to know the technical terminology.',
+                'Absolutely! Just explain what you want your devices to do. I can help with the setup and show you how to use the important features.',
         ],
-
         [
             'question' => 'Do I need to purchase equipment beforehand?',
             'answer' =>
-                'Not necessarily. I can help review compatibility and requirements before you purchase equipment.',
+                'Not necessarily. I can help you determine what equipment you need and check compatibility before you make a purchase.',
+        ],
+        [
+            'question' => 'Can you help connect multiple devices together?',
+            'answer' =>
+                'Yes. I can help connect compatible devices such as TVs, streaming equipment, speakers, printers, and other household electronics.',
+        ],
+        [
+            'question' => 'Can you help if my device will not connect to Wi-Fi?',
+            'answer' =>
+                'Yes. I can troubleshoot common Wi-Fi connection problems and help connect compatible devices to your existing network. More extensive network problems may require additional troubleshooting.',
+        ],
+        [
+            'question' => 'Do I need any subscriptions or accounts?',
+            'answer' =>
+                'Some devices and services require an internet connection, an account, or a paid subscription. I can help explain these requirements during setup.',
+        ],
+        [
+            'question' => 'Do you install or mount TVs and antennas?',
+            'answer' =>
+                'I can help connect and configure televisions, streaming devices, and indoor antennas. Physical mounting or more involved installation work is evaluated separately and may not be available.',
         ],
 
     ],
