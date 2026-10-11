@@ -93,25 +93,6 @@
 
     ],
 
-    'pricing' => [
-
-        [
-            'name' => 'Infrastructure Consultation',
-            'price' => 'TBD',
-        ],
-
-        [
-            'name' => 'Server Provisioning',
-            'price' => 'Custom Quote',
-        ],
-
-        [
-            'name' => 'Deployment & Automation',
-            'price' => 'Custom Quote',
-        ],
-
-    ],
-
     'faq' => [
 
         [

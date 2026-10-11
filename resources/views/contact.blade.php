@@ -220,16 +220,14 @@
 
                     <p>
                         Prefer your own email application? Copy my business
-                        address and contact me directly.
+                        email address and contact me directly.
                     </p>
 
-                    <div class="contact-email">
-
-                        <span id="business-email"
-                              class="contact-email__address">
+                    <span id="business-email"
+                          class="contact-email__address">
                             contact@michaelstechrepair.com
-                        </span>
-
+                    </span>
+                    <div class="contact-email">
                         <button
                             type="button"
                             class="button button--secondary"
@@ -240,9 +238,29 @@
                         </button>
 
                     </div>
+                    <span id="business-email"
+                          class="contact-email__address">
+                        Prefer to call or text? Copy my business phone number
+                        and contact me directly.
+                    </span>
+                    <p>
 
-                    <p class="contact-email__status"
-                       id="copy-email-status"
+                    </p>
+                    <div class="contact-email"> 
+
+                        <button
+                            type="button"
+                            class="button button--secondary"
+                            id="copy-business-phone"
+                            data-phone="7632689067"
+                        >
+                            Copy Phone Number
+                        </button>
+                    
+                    </div>
+
+                    <p class="contact-copy-status"
+                       id="copy-contact-status"
                        role="status"
                        aria-live="polite"></p>
 
@@ -272,25 +290,5 @@
 </main>
 
 @include('layouts.footer')
-
-<script>
-(() => {
-    const button = document.getElementById('copy-business-email');
-    const status = document.getElementById('copy-email-status');
-
-    if (!button || !status) return;
-
-    button.addEventListener('click', async () => {
-        try {
-            await navigator.clipboard.writeText(button.dataset.email);
-            button.textContent = 'Copied!';
-            status.textContent = 'Email address copied.';
-        } catch {
-            status.textContent =
-                'Please select and copy the email address above.';
-        }
-    });
-})();
-</script>
 
 @endsection

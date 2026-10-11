@@ -93,25 +93,6 @@
 
     ],
 
-    'pricing' => [
-
-        [
-            'name' => 'Build Consultation',
-            'price' => 'TBD',
-        ],
-
-        [
-            'name' => 'Custom PC Assembly',
-            'price' => 'TBD',
-        ],
-
-        [
-            'name' => 'Hardware Upgrades',
-            'price' => 'TBD',
-        ],
-
-    ],
-
     'faq' => [
 
         [
