@@ -59,16 +59,6 @@
 
     ],
 
-    'included' => [
-
-        'Hardware troubleshooting',
-        'Operating system troubleshooting',
-        'Driver installation',
-        'Operating system setup',
-        'Speed optimization',
-
-    ],
-
     'imageLabel' =>
         'Computer Repair Image',
 
@@ -96,25 +86,6 @@
             'title' => 'Repair & Testing',
             'description' =>
                 'The repair is completed and the system is tested afterward.',
-        ],
-
-    ],
-
-    'pricing' => [
-
-        [
-            'name' => 'Diagnosis',
-            'price' => 'TBD',
-        ],
-
-        [
-            'name' => 'Software Repair',
-            'price' => 'TBD',
-        ],
-
-        [
-            'name' => 'Hardware Installation',
-            'price' => 'TBD',
         ],
 
     ],

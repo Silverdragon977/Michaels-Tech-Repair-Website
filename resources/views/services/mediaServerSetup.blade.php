@@ -93,25 +93,6 @@
 
     ],
 
-    'pricing' => [
-
-        [
-            'name' => 'Media Server Consultation',
-            'price' => 'TBD',
-        ],
-
-        [
-            'name' => 'Initial Server Setup',
-            'price' => 'TBD',
-        ],
-
-        [
-            'name' => 'Additional Configuration',
-            'price' => 'TBD',
-        ],
-
-    ],
-
     'faq' => [
 
         [

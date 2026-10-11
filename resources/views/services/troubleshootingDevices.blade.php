@@ -93,25 +93,6 @@
 
     ],
 
-    'pricing' => [
-
-        [
-            'name' => 'Initial Troubleshooting',
-            'price' => 'TBD',
-        ],
-
-        [
-            'name' => 'Extended Diagnosis',
-            'price' => 'TBD',
-        ],
-
-        [
-            'name' => 'Remote Support',
-            'price' => 'TBD',
-        ],
-
-    ],
-
     'faq' => [
 
         [

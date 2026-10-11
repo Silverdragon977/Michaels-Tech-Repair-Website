@@ -47,19 +47,11 @@
             'description' =>
                 'Reviewing wireless security, firewall rules, and practical network configuration improvements.',
         ],
-
-    ],
-
-    'included' => [
-
-        'Home network consultation',
-        'Router and access point configuration',
-        'Wi-Fi troubleshooting',
-        'Ethernet and switch configuration',
-        'Guest network setup',
-        'VLAN configuration for supported equipment',
-        'Firewall and network security review',
-        'Network diagnostics and documentation',
+        [
+            'title' => 'Custom Length Network Cables',
+            'description' =>
+                'Creating custom length Ethernet cables (RJ-45)to fit your network setup neatly and efficiently.',
+        ]
 
     ],
 
@@ -90,27 +82,10 @@
             'description' =>
                 'We verify connectivity, coverage, and the relevant network features.',
         ],
+        
 
     ],
 
-    'pricing' => [
-
-        [
-            'name' => 'Network Consultation',
-            'price' => 'TBD',
-        ],
-
-        [
-            'name' => 'Router / Wi-Fi Setup',
-            'price' => 'TBD',
-        ],
-
-        [
-            'name' => 'Advanced Network Configuration',
-            'price' => 'Custom Quote',
-        ],
-
-    ],
 
     'faq' => [
 
