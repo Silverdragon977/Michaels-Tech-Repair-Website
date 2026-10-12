@@ -1,3 +1,4 @@
+// resources/js/components/NetworkCablePricing.ts
 export function initNetworkPricing(): void {
     const container = document.getElementById(
         'network-cable-pricing'
@@ -139,14 +140,14 @@ export function initNetworkPricing(): void {
                 Total
             </span>
 
-            <span id="network-price-formula">
+            <span id="network-total-price">
                 $${(serviceFee + pricePerFoot).toFixed(2)}
             </span>
 
         </div>
         <div class="pricing-row">
-            <a href="/contact">
-                <span>Please contact me for a quote!</span>
+            <a href="/contact" class="button button--secondary">
+                Please contact me for a quote!
             </a>
         </div>
     `;
