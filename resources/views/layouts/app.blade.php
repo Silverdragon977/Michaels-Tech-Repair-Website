@@ -8,8 +8,9 @@
         content="width=device-width, initial-scale=1.0"
     >
 
+    <link rel="icon" type="image/png" href="{{ asset('images/icon.ico') }}">
     <title>
-        @yield('title', "Michael's Tech Repair")
+    @yield('title', "Michael's Tech Repair")
     </title>
     @viteReactRefresh
     @vite([
