@@ -178,21 +178,32 @@
                                 Pricing
                             </h2>
 
-                            @foreach ($pricing as $price)
+                            @if (($pricing['type'] ?? null) === 'network-cable')
 
-                                <div class="pricing-row">
+                                <div
+                                    id="network-cable-pricing"
+                                    data-service-fee="{{ $pricing['service_fee'] }}"
+                                    data-price-per-foot="{{ $pricing['price_per_foot'] }}"
+                                    data-max-feet="{{ $pricing['max_feet'] }}"
+                                ></div>
 
-                                    <span>
-                                        {{ $price['name'] }}
-                                    </span>
+                            @else
 
-                                    <span>
-                                        {{ $price['price'] }}
-                                    </span>
+                                @foreach ($pricing as $price)
 
-                                </div>
+                                    <div class="pricing-row">
+                                        <span>
+                                            Price per 30mins of active work : $10
+                                        </span>
+                                        <span>
+                                            Price per hour of active work : $20
+                                        </span>
 
-                            @endforeach
+                                    </div>
+
+                                @endforeach
+
+                            @endif
 
                         </section>
 

@@ -5,6 +5,8 @@ import { createRoot } from 'react-dom/client';
 import ReactDemo from './components/ReactDemo';
 import { initContactPhone } from './components/contactPhone';
 import { initContactPrivacy } from './components/contact-privacy';
+import { initNetworkCablePricing, initNetworkPricing } from './components/NetworkCablePricing';
+
 
 const demoElement = document.getElementById('react-demo');
 
@@ -27,8 +29,10 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         initContactPhone();
         initContactPrivacy();
+        initNetworkPricing();
     }  );
 } else {
     initContactPhone();
     initContactPrivacy();
+    initNetworkPricing();
 }

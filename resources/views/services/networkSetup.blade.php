@@ -85,6 +85,15 @@
         
 
     ],
+    'pricing' => [
+        'type' => 'network-cable',
+    
+        'service_fee' => 4.00,
+    
+        'price_per_foot' => 0.30,
+    
+        'max_feet' => 50,
+    ],
 
 
     'faq' => [
@@ -106,6 +115,11 @@
             'answer' =>
                 'Not necessarily. I can review your existing equipment before recommending additional hardware.',
         ],
+        [
+            'question' => 'Can you create custom length network cables?',
+            'answer' =>
+                'Yes. I can create Ethernet cables (RJ-45) to the exact length needed for your network setup. I can do this on-site to ensure a perfect fit. Additionally, I have lots of cable in stock and will do 50ft + orders as needed.',
+        ]
 
     ],
 
